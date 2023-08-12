@@ -4,7 +4,6 @@
 .site-header {
   font-family: 'Verdana', serif !important;
 }
-
 .jumbotron .display-4 {
   font-weight: bold;
 }
@@ -14,7 +13,7 @@ nav a {
 }
 
 .bd-placeholder-img {
-  font-size: 1.125rem;
+  font-size: 1.12rem;
   text-anchor: middle;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -188,3 +187,42 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+
+.container {
+  /*background: linear-gradient(201deg, #6dff33 0%, #fa361c 78%);*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #56a0f0;
+}
+
