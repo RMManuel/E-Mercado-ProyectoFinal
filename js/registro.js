@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         //Chequea que el usuario no este registrado aun
         if (localStorage.getItem(nombre) !== null) {
             alert('¡El usuario ' + nombre + ' ya está registrado!');
+            window.location.href = "login.html"
             return; // Detener el proceso de registro
         }
         // Guardar los datos en el almacenamiento local
