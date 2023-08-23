@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Comprobar si hay una categoría seleccionada en el localStorage
     if (selectedCategoryId) {
-        const response = await getJSONData(PRODUCTS_URL + selectedCategoryId + EXT_TYPE);
+        let response = await getJSONData(PRODUCTS_URL + selectedCategoryId + EXT_TYPE);
         const carList = response.data;
 
         const prodTitle = document.getElementById("titulo");
@@ -20,8 +20,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const btnRelevancia=document.getElementById("relevancia");
         const btnNoFiltro=document.getElementById("noFiltro");
 
+        let copiaResponse=[...productList];
+
         btnPrecioAsc.addEventListener("click", function(){
-            let datosSorteados=productList.sort(function(a,b){
+            let datosSorteados=copiaResponse.sort(function(a,b){
                 if(a.cost>b.cost){
                     return 1;
                 }    
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ListarDatos(datosSorteados);
         });
         btnPrecioDesc.addEventListener("click",function(){
-            let datosSorteados=productList.sort(function(a,b){
+            let datosSorteados=copiaResponse.sort(function(a,b){
                 if(a.cost<b.cost){
                     return 1;
                 }
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ListarDatos(datosSorteados);
         });
         btnRelevancia.addEventListener("click",function(){
-            let datosSorteados=productList.sort(function(a,b){
+            let datosSorteados=copiaResponse.sort(function(a,b){
                 if(a.soldCount<b.soldCount){
                     return 1;
                 }
