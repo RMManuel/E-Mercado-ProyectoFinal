@@ -43,7 +43,6 @@
     </div>
   </nav>
   <main class="pb-5 container">
-    
     <div class="d-flex align-items-center flex-column p-4"  id="titulo">
       
     </div>
@@ -53,6 +52,15 @@
       <button class="btn btn-light" id="relevancia">Relevancia <i class="bi bi-sort-down"></i></button>
       <button class="btn btn-light" id="noFiltro"><i class="bi bi-x-lg"></i></button>
     </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="btn-group btn-group-sm" id="contenedor-Filtro" style="height: 3em;">
+        <p class="font-weight-normal text-end my-2 mx-2">Precio</p>
+          <input class="form-control m-2" type="text" placeholder="min" id="inputmin">
+          <input class="form-control m-2" type="text" placeholder="max" id="inputmax">
+          <button class="btn btn-light btn-block m-2" id="filtrarPrecio">Filtrar</button>
+          <button class="btn btn-link btn-sm m-2" id="filtrarLimpiar">Limpiar</button>
+      </div>
+    </nav>
     <div  id='container' class="container">
       
     </div>

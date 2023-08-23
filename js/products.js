@@ -66,6 +66,41 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.innerHTML = ""
             ListarDatos(productList);
         });
+
+        const btnFiltrar=document.getElementById("filtrarPrecio");
+        const btnLimpiar=document.getElementById("filtrarLimpiar");
+        
+
+        btnFiltrar.addEventListener("click",function(){
+            let precioMin=document.getElementById("inputmin").value;
+            let precioMax=document.getElementById("inputmax").value;
+            let datosFiltrados=[];
+            if(precioMax==0){
+                precioMax=Number.MAX_SAFE_INTEGER;
+            }
+            productList.forEach(producto=>{
+                if((parseInt(producto.cost)>=parseInt(precioMin))&&(parseInt(producto.cost)<=parseInt(precioMax))){
+                    datosFiltrados.push(producto);
+                    
+                }
+            })
+            if(datosFiltrados.length===0){
+                alert("No hay productos en ese rango");
+            }
+            container.innerHTML="";
+            ListarDatos(datosFiltrados);
+        })
+
+        btnLimpiar.addEventListener("click",function(){
+            let precioMin=document.getElementById("inputmin").value;
+            let precioMax=document.getElementById("inputmax").value;
+            precioMin="";
+            precioMax="";
+            
+            
+            container.innerHTML = "";
+            ListarDatos(productList);
+        })
         
     }
 });
