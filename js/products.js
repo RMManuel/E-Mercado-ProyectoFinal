@@ -1,38 +1,30 @@
-const API_URL = 'https://japceibal.github.io/emercado-api/cats_products/101.json';
+document.addEventListener('DOMContentLoaded', async () => {
+    // Obtener el valor del localStorage
+    const selectedCategoryId = localStorage.getItem("catID");
 
-async function getCars(){
-    const response = await fetch(API_URL);
-    const json = await response.json();
-    
-    const cars = json
-    return cars;
+    // Comprobar si hay una categoría seleccionada en el localStorage
+    if (selectedCategoryId) {
+        const response = await getJSONData(PRODUCTS_URL + selectedCategoryId + EXT_TYPE);
+        const carList = response.data;
 
-}; 
+        const prodTitle = document.getElementById("titulo");
+        prodTitle.innerHTML = `
+            <h1> Productos </h1>
+            <p>Aqui veras los productos de la categoria ${carList.catName}</p>`;
 
+        const productList = carList.products;
+        const container = document.getElementById('container');
 
-document.addEventListener('DOMContentLoaded', async () =>{
-    const carList = await getCars(); 
+        productList.forEach(prodList => {
+            let name = prodList.name;
+            let description = prodList.description;
+            let price = prodList.cost;
+            let currency = prodList.currency;
+            let soldCount = prodList.soldCount;
+            let image = prodList.image;
 
-    const prodTitle= document.getElementById("titulo");
-    prodTitle.innerHTML=`
-        <h1> Productos </h1>
-        <p>Aqui veras los productos de la categoria `+carList.catName+`</p>`
-
-    const productList=carList.products;
-    const container = document.getElementById('container');
-
-
-    productList.forEach(prodList => {
-
-        let name = prodList.name;
-        let description = prodList.description;
-        let price = prodList.cost;
-        let currency = prodList.currency;
-        let soldCount = prodList.soldCount;
-        let image = prodList.image;
-
-        const productsList = document.createElement('div');
-        productsList.innerHTML = `
+            const productsList = document.createElement('div');
+            productsList.innerHTML = `
         <div onclick="setCatID(${prodList.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
@@ -47,8 +39,8 @@ document.addEventListener('DOMContentLoaded', async () =>{
                     </div>
                 </div>
             </div>
-            </div>`
-        ;
-        container.appendChild(productsList);
-    });
+            </div>`;
+            container.appendChild(productsList);
+        });
+    }
 });
