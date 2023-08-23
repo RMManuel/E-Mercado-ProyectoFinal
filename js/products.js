@@ -13,7 +13,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             <p>Aqui veras los productos de la categoria ${carList.catName}</p>`;
 
         const productList = carList.products;
-        const container = document.getElementById('container');
+        ListarDatos(productList);
+
+        const btnPrecioAsc=document.getElementById("precioAsc")
+        const btnPrecioDesc=document.getElementById("precioDesc")
+        const btnRelevancia=document.getElementById("relevancia")
+
+        btnPrecioAsc.addEventListener("click", function(){
+            carList
+        })
+        
+    }
+});
+
+function ListarDatos(productList){
+    const container = document.getElementById('container');
 
         productList.forEach(prodList => {
             let name = prodList.name;
@@ -41,6 +55,5 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
             </div>`;
             container.appendChild(productsList);
-        });
-    }
-});
+        })
+}
