@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const productList = carList.products;
         ListarDatos(productList);
 
-        const btnPrecioAsc=document.getElementById("precioAsc")
-        const btnPrecioDesc=document.getElementById("precioDesc")
-        const btnRelevancia=document.getElementById("relevancia")
+        const btnPrecioAsc=document.getElementById("precioAsc");
+        const btnPrecioDesc=document.getElementById("precioDesc");
+        const btnRelevancia=document.getElementById("relevancia");
+        const btnNoFiltro=document.getElementById("noFiltro");
 
         btnPrecioAsc.addEventListener("click", function(){
             let datosSorteados=productList.sort(function(a,b){
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             })
             container.innerHTML = ""
             ListarDatos(datosSorteados);
-        })
+        });
         btnPrecioDesc.addEventListener("click",function(){
             let datosSorteados=productList.sort(function(a,b){
                 if(a.cost<b.cost){
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             })
             container.innerHTML = ""
             ListarDatos(datosSorteados);
-        })
+        });
         btnRelevancia.addEventListener("click",function(){
             let datosSorteados=productList.sort(function(a,b){
                 if(a.soldCount<b.soldCount){
@@ -58,7 +59,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             })
             container.innerHTML = ""
             ListarDatos(datosSorteados);
-        })
+        });
+        btnNoFiltro.addEventListener("click", function(){
+            container.innerHTML = ""
+            ListarDatos(productList);
+        });
         
     }
 });
