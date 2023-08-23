@@ -12,13 +12,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             <h1> Productos </h1>
             <p>Aqui veras los productos de la categoria ${carList.catName}</p>`;
 
-        const productList = carList.products;
+        let productList = [...carList.products];
+        let productListFiltrar = [...carList.products];
         ListarDatos(productList);
 
         const btnPrecioAsc=document.getElementById("precioAsc");
         const btnPrecioDesc=document.getElementById("precioDesc");
         const btnRelevancia=document.getElementById("relevancia");
         const btnNoFiltro=document.getElementById("noFiltro");
+        const buscador=document.getElementById("buscador");
+
+        buscador.addEventListener("input", function(){
+            let input = buscador.value.toLowerCase();
+            productList = productListFiltrar.filter(item => item.name.toLowerCase().includes(input) || item.description.toLowerCase().includes(input) || item.currency.toLowerCase().includes(input) || item.cost.toString().includes(input));
+            container.innerHTML = "";
+            ListarDatos(productList);
+        });
 
         btnPrecioAsc.addEventListener("click", function(){
             let datosSorteados=productList.sort(function(a,b){
@@ -31,8 +40,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return 0;
                     
             })
-            container.innerHTML = ""
+            container.innerHTML = "";
             ListarDatos(datosSorteados);
+            
         });
         btnPrecioDesc.addEventListener("click",function(){
             let datosSorteados=productList.sort(function(a,b){
@@ -44,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
                 return 0;
             })
-            container.innerHTML = ""
+            container.innerHTML = "";
             ListarDatos(datosSorteados);
         });
         btnRelevancia.addEventListener("click",function(){
@@ -57,12 +67,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
                 return 0;
             })
-            container.innerHTML = ""
+            container.innerHTML = "";
             ListarDatos(datosSorteados);
         });
         btnNoFiltro.addEventListener("click", function(){
-            container.innerHTML = ""
-            ListarDatos(productList);
+            container.innerHTML = "";
+            ListarDatos(carList.products);
         });
         
     }
@@ -91,11 +101,11 @@ function ListarDatos(productList){
                                 <p class="mb-1">${name} - ${currency} ${price}</p>
                                 <small class="text-muted">${soldCount} vendidos</small>
                         </div>
-                        <small class="text-muted">${description} vendidos</small>
+                        <small class="text-muted">${description}</small>
                     </div>
                 </div>
             </div>
             </div>`;
             container.appendChild(productsList);
-        })
+        });
 }
