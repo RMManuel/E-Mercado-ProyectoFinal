@@ -20,7 +20,44 @@ document.addEventListener('DOMContentLoaded', async () => {
         const btnRelevancia=document.getElementById("relevancia")
 
         btnPrecioAsc.addEventListener("click", function(){
-            carList
+            let datosSorteados=productList.sort(function(a,b){
+                if(a.cost>b.cost){
+                    return 1;
+                }    
+                if(a.cost<b.cost){
+                    return -1;
+                }
+                return 0;
+                    
+            })
+            container.innerHTML = ""
+            ListarDatos(datosSorteados);
+        })
+        btnPrecioDesc.addEventListener("click",function(){
+            let datosSorteados=productList.sort(function(a,b){
+                if(a.cost<b.cost){
+                    return 1;
+                }
+                if(a.cost>b.cost){
+                    return -1;
+                }
+                return 0;
+            })
+            container.innerHTML = ""
+            ListarDatos(datosSorteados);
+        })
+        btnRelevancia.addEventListener("click",function(){
+            let datosSorteados=productList.sort(function(a,b){
+                if(a.soldCount<b.soldCount){
+                    return 1;
+                }
+                if(a.soldCount>b.soldCount){
+                    return -1;
+                }
+                return 0;
+            })
+            container.innerHTML = ""
+            ListarDatos(datosSorteados);
         })
         
     }
