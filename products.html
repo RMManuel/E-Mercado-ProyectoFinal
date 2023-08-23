@@ -7,6 +7,7 @@
   <title>eMercado - Todo lo que busques está aquí</title>
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -42,11 +43,11 @@
     <div class="d-flex align-items-center flex-column p-4"  id="titulo">
       
     </div>
-    <div id="btnFiltros">
-            <button id="precioAsc">Precio Asc</button>
-            <button id="precioDesc">Precio Desc</button>
-            <button id="relevancia">Relevancia</button>
-        
+    <div class="btn-group btn-group-toggle mb-4" id="btnFiltros">
+      <button class="btn btn-light" id="precioAsc">Precio <i class="bi bi-sort-up"></i></button>
+      <button class="btn btn-light" id="precioDesc">Precio <i class="bi bi-sort-down"></i></button>
+      <button class="btn btn-light" id="relevancia">Relevancia <i class="bi bi-sort-down"></i></button>
+      <button class="btn btn-light" id="noFiltro"><i class="bi bi-x-lg"></i></button>
     </div>
     <div  id='container' class="container">
       
