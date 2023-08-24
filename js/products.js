@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Comprobar si hay una categoría seleccionada en el localStorage
     if (selectedCategoryId) {
-        const response = await getJSONData(PRODUCTS_URL + selectedCategoryId + EXT_TYPE);
+        let response = await getJSONData(PRODUCTS_URL + selectedCategoryId + EXT_TYPE);
         const carList = response.data;
 
         let productList = [...carList.products];
@@ -51,6 +51,42 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.innerHTML = "";
             filtrar(productList, filtro);
         });
+        
+
+        const btnFiltrar=document.getElementById("filtrarPrecio");
+        const btnLimpiar=document.getElementById("filtrarLimpiar");
+        
+
+        btnFiltrar.addEventListener("click",function(){
+            let precioMin=document.getElementById("inputmin").value;
+            let precioMax=document.getElementById("inputmax").value;
+            let datosFiltrados=[];
+            if(precioMax==0){
+                precioMax=Number.MAX_SAFE_INTEGER;
+            }
+            productList.forEach(producto=>{
+                if((parseInt(producto.cost)>=parseInt(precioMin))&&(parseInt(producto.cost)<=parseInt(precioMax))){
+                    datosFiltrados.push(producto);
+                    
+                }
+            })
+            if(datosFiltrados.length===0){
+                alert("No hay productos en ese rango");
+            }
+            container.innerHTML="";
+            ListarDatos(datosFiltrados);
+        })
+
+        btnLimpiar.addEventListener("click",function(){
+            let precioMin=document.getElementById("inputmin").value;
+            let precioMax=document.getElementById("inputmax").value;
+            precioMin="";
+            precioMax="";
+            
+            
+            container.innerHTML = "";
+            ListarDatos(productList);
+        })
         
     }
 });
@@ -116,11 +152,11 @@ function ListarDatos(productList){
                                 <p class="mb-1">${name} - ${currency} ${price}</p>
                                 <small class="text-muted">${soldCount} vendidos</small>
                         </div>
-                        <small class="text-muted">${description}</small>
+                        <small class="text-muted">${description} vendidos</small>
                     </div>
                 </div>
             </div>
             </div>`;
             container.appendChild(productsList);
-        });
+        })
 }
