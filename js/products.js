@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         ListarDatos(productList);
 
+
         btnPrecioAsc.addEventListener("click", function(){
             filtro = "PrecioAsc";
             filtrar(productList, filtro);
@@ -36,6 +37,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         btnRelevancia.addEventListener("click",function(){
             filtro = "Relevancia";
             filtrar(productList, filtro);
+
+       
         });
         btnNoFiltro.addEventListener("click", function(){
             filtro = "";
@@ -51,7 +54,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.innerHTML = "";
             filtrar(productList, filtro);
         });
-        
 
         const btnFiltrar=document.getElementById("filtrarPrecio");
         const btnLimpiar=document.getElementById("filtrarLimpiar");
