@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const btnPrecioAsc=document.getElementById("precioAsc");
-    const btnPrecioDesc=document.getElementById("precioDesc");
-    const btnRelevancia=document.getElementById("relevancia");
-    const btnNoFiltro=document.getElementById("noFiltro");
-    const buscador=document.getElementById("buscador");
+    const btnPrecioAsc = document.getElementById("precioAsc");
+    const btnPrecioDesc = document.getElementById("precioDesc");
+    const btnRelevancia = document.getElementById("relevancia");
+    const btnNoFiltro = document.getElementById("noFiltro");
+    const buscador = document.getElementById("buscador");
 
     // Obtener el valor del localStorage
     const selectedCategoryId = localStorage.getItem("catID");
@@ -26,21 +26,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         ListarDatos(productList);
 
 
-        btnPrecioAsc.addEventListener("click", function(){
+        btnPrecioAsc.addEventListener("click", function () {
             filtro = "PrecioAsc";
             filtrar(productList, filtro);
         });
-        btnPrecioDesc.addEventListener("click",function(){
+        btnPrecioDesc.addEventListener("click", function () {
             filtro = "PrecioDesc";
             filtrar(productList, filtro);
         });
-        btnRelevancia.addEventListener("click",function(){
+        btnRelevancia.addEventListener("click", function () {
             filtro = "Relevancia";
             filtrar(productList, filtro);
 
-       
+
         });
-        btnNoFiltro.addEventListener("click", function(){
+        btnNoFiltro.addEventListener("click", function () {
             filtro = "";
             container.innerHTML = "";
             let input = buscador.value.toLowerCase();
@@ -48,80 +48,86 @@ document.addEventListener('DOMContentLoaded', async () => {
             filtrar(productList, filtro);
         });
 
-        buscador.addEventListener("input", function(){
+        buscador.addEventListener("input", function () {
             let input = buscador.value.toLowerCase();
             productList = productListFiltrar.filter(item => item.name.toLowerCase().includes(input) || item.description.toLowerCase().includes(input) || item.currency.toLowerCase().includes(input) || item.cost.toString().includes(input));
             container.innerHTML = "";
             filtrar(productList, filtro);
         });
 
-        const btnFiltrar=document.getElementById("filtrarPrecio");
-        const btnLimpiar=document.getElementById("filtrarLimpiar");
-        
+        const btnFiltrar = document.getElementById("filtrarPrecio");
+        const btnLimpiar = document.getElementById("filtrarLimpiar");
 
-        btnFiltrar.addEventListener("click",function(){
-            let precioMin=document.getElementById("inputmin").value;
-            let precioMax=document.getElementById("inputmax").value;
-            let datosFiltrados=[];
-            if(precioMax==0){
-                precioMax=Number.MAX_SAFE_INTEGER;
+
+        btnFiltrar.addEventListener("click", function () {
+            let precioMin = document.getElementById("inputmin").value;
+            let precioMax = document.getElementById("inputmax").value;
+            // let datosFiltrados=[]; esto no es necesario
+            if (precioMax == 0) {
+                precioMax = Number.MAX_SAFE_INTEGER;
             }
-            productList.forEach(producto=>{
-                if((parseInt(producto.cost)>=parseInt(precioMin))&&(parseInt(producto.cost)<=parseInt(precioMax))){
-                    datosFiltrados.push(producto);
-                    
-                }
-            })
-            if(datosFiltrados.length===0){
+            // productList.forEach(producto=>{
+            //     if((parseInt(producto.cost)>=parseInt(precioMin))&&(parseInt(producto.cost)<=parseInt(precioMax))){
+            //         datosFiltrados.push(producto);
+
+            //     } esto lo cambié por un filter
+
+            const datosFiltrados = productListFiltrar.filter(producto =>
+                parseInt(producto.cost) >= precioMin && parseInt(producto.cost) <= precioMax
+            );
+            if (datosFiltrados.length === 0) {
                 alert("No hay productos en ese rango");
             }
-            container.innerHTML="";
-            ListarDatos(datosFiltrados);
+
+            container.innerHTML = "";
+            productList = datosFiltrados; //para actualizar el productList y que se pueda ordenar despues de filtrar por precio
+
+            filtrar(datosFiltrados, filtro); //acá cambié para que no llame a ListarDatos, sino que a filtrar que ya tiene el listardatos, asi cuando se hace click en ordenar funcione.
+        });
+
+        btnLimpiar.addEventListener("click", function () {
+            let precioMin = document.getElementById("inputmin");
+            let precioMax = document.getElementById("inputmax");
+            precioMin.value = "";
+            precioMax.value = "";
+
+            productList = [...productListFiltrar] //acá otra vez setea el valor al inicial para que aparezcan todos los productos.
+            container.innerHTML = "";
+            ListarDatos(productList); 
         })
 
-        btnLimpiar.addEventListener("click",function(){
-            let precioMin=document.getElementById("inputmin").value;
-            let precioMax=document.getElementById("inputmax").value;
-            precioMin="";
-            precioMax="";
-            
-            
-            container.innerHTML = "";
-            ListarDatos(productList);
-        })
-        
     }
 });
 
-function filtrar(array, filtro){
+function filtrar(array, filtro) {
     let datosSorteados = array;
     if (filtro === "PrecioDesc") {
-        datosSorteados=array.sort(function(a,b){
-            if(a.cost<b.cost){
+        datosSorteados = array.sort(function (a, b) {
+            if (a.cost < b.cost) {
                 return 1;
             }
-            if(a.cost>b.cost){
+            if (a.cost > b.cost) {
                 return -1;
             }
             return 0;
-        }) 
+        })
     } else if (filtro === "PrecioAsc") {
-        datosSorteados=array.sort(function(a,b){
-            if(a.cost>b.cost){
+        datosSorteados = array.sort(function (a, b) {
+            if (a.cost > b.cost) {
                 return 1;
-            }    
-            if(a.cost<b.cost){
+            }
+            if (a.cost < b.cost) {
                 return -1;
             }
             return 0;
-                
-        })    
+
+        })
     } else if (filtro === "Relevancia") {
-        datosSorteados=array.sort(function(a,b){
-            if(a.soldCount<b.soldCount){
+        datosSorteados = array.sort(function (a, b) {
+            if (a.soldCount < b.soldCount) {
                 return 1;
             }
-            if(a.soldCount>b.soldCount){
+            if (a.soldCount > b.soldCount) {
                 return -1;
             }
             return 0;
@@ -131,19 +137,19 @@ function filtrar(array, filtro){
     ListarDatos(datosSorteados);
 }
 
-function ListarDatos(productList){
+function ListarDatos(productList) {
     const container = document.getElementById('container');
 
-        productList.forEach(prodList => {
-            let name = prodList.name;
-            let description = prodList.description;
-            let price = prodList.cost;
-            let currency = prodList.currency;
-            let soldCount = prodList.soldCount;
-            let image = prodList.image;
+    productList.forEach(prodList => {
+        let name = prodList.name;
+        let description = prodList.description;
+        let price = prodList.cost;
+        let currency = prodList.currency;
+        let soldCount = prodList.soldCount;
+        let image = prodList.image;
 
-            const productsList = document.createElement('div');
-            productsList.innerHTML = `
+        const productsList = document.createElement('div');
+        productsList.innerHTML = `
         <div onclick="setCatID(${prodList.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
@@ -159,6 +165,6 @@ function ListarDatos(productList){
                 </div>
             </div>
             </div>`;
-            container.appendChild(productsList);
-        })
+        container.appendChild(productsList);
+    })
 }
