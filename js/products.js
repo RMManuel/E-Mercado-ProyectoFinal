@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         btnFiltrar.addEventListener("click", function () {
             let precioMin = document.getElementById("inputmin").value;
             let precioMax = document.getElementById("inputmax").value;
-            // let datosFiltrados=[]; esto no es necesario
+            let datosFiltrados = [];
             if (precioMax == 0) {
                 precioMax = Number.MAX_SAFE_INTEGER;
             }
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             //     } esto lo cambié por un filter
 
-            const datosFiltrados = productListFiltrar.filter(producto =>
+            datosFiltrados = productListFiltrar.filter(producto =>
                 parseInt(producto.cost) >= precioMin && parseInt(producto.cost) <= precioMax
             );
             if (datosFiltrados.length === 0) {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             productList = [...productListFiltrar] //acá otra vez setea el valor al inicial para que aparezcan todos los productos.
             container.innerHTML = "";
-            ListarDatos(productList); 
+            ListarDatos(productList);
         })
 
     }
