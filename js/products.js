@@ -66,11 +66,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (precioMax == 0) {
                 precioMax = Number.MAX_SAFE_INTEGER;
             }
-            // productList.forEach(producto=>{
-            //     if((parseInt(producto.cost)>=parseInt(precioMin))&&(parseInt(producto.cost)<=parseInt(precioMax))){
-            //         datosFiltrados.push(producto);
-
-            //     } esto lo cambié por un filter
 
             datosFiltrados = productListFiltrar.filter(producto =>
                 parseInt(producto.cost) >= precioMin && parseInt(producto.cost) <= precioMax
@@ -82,6 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.innerHTML = "";
             productList = datosFiltrados; //para actualizar el productList y que se pueda ordenar despues de filtrar por precio
 
+
             filtrar(datosFiltrados, filtro); //acá cambié para que no llame a ListarDatos, sino que a filtrar que ya tiene el listardatos, asi cuando se hace click en ordenar funcione.
         });
 
@@ -91,9 +87,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             precioMin.value = "";
             precioMax.value = "";
 
-            productList = [...productListFiltrar] //acá otra vez setea el valor al inicial para que aparezcan todos los productos.
+            productList = [...productListFiltrar];
             container.innerHTML = "";
-            ListarDatos(productList);
+            filtrar(productList,filtro);
         })
 
     }
