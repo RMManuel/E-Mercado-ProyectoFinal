@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btnRelevancia = document.getElementById("relevancia");
     const btnNoFiltro = document.getElementById("noFiltro");
     const buscador = document.getElementById("buscador");
+    const btnFiltrar = document.getElementById("filtrarPrecio");
+    const btnLimpiar = document.getElementById("filtrarLimpiar");
 
     // Obtener el valor del localStorage
     const selectedCategoryId = localStorage.getItem("catID");
@@ -28,76 +30,64 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         btnPrecioAsc.addEventListener("click", function () {
             filtro = "PrecioAsc";
-            filtrar(productList, filtro);
+            filtrar(filtrarPrecio(productList),filtro);
         });
+
         btnPrecioDesc.addEventListener("click", function () {
             filtro = "PrecioDesc";
-            filtrar(productList, filtro);
+            filtrar(filtrarPrecio(productList),filtro);
         });
+
         btnRelevancia.addEventListener("click", function () {
             filtro = "Relevancia";
-            filtrar(productList, filtro);
-
-
+            filtrar(filtrarPrecio(productList),filtro);
         });
+
         btnNoFiltro.addEventListener("click", function () {
             filtro = "";
             container.innerHTML = "";
             let input = buscador.value.toLowerCase();
             productList = productListFiltrar.filter(item => item.name.toLowerCase().includes(input) || item.description.toLowerCase().includes(input) || item.currency.toLowerCase().includes(input) || item.cost.toString().includes(input));
-            filtrar(productList, filtro);
+            filtrar(filtrarPrecio(productList),filtro);
         });
 
         buscador.addEventListener("input", function () {
             let input = buscador.value.toLowerCase();
             productList = productListFiltrar.filter(item => item.name.toLowerCase().includes(input) || item.description.toLowerCase().includes(input) || item.currency.toLowerCase().includes(input) || item.cost.toString().includes(input));
             container.innerHTML = "";
-            filtrar(productList, filtro);
+            filtrar(filtrarPrecio(productList),filtro);
         });
 
-        const btnFiltrar = document.getElementById("filtrarPrecio");
-        const btnLimpiar = document.getElementById("filtrarLimpiar");
-
-
         btnFiltrar.addEventListener("click", function () {
-            let precioMin = document.getElementById("inputmin").value;
-            let precioMax = document.getElementById("inputmax").value;
-            let datosFiltrados = [];
-            if (precioMax == 0) {
-                precioMax = Number.MAX_SAFE_INTEGER;
-            }
-            // productList.forEach(producto=>{
-            //     if((parseInt(producto.cost)>=parseInt(precioMin))&&(parseInt(producto.cost)<=parseInt(precioMax))){
-            //         datosFiltrados.push(producto);
-
-            //     } esto lo cambié por un filter
-
-            datosFiltrados = productListFiltrar.filter(producto =>
-                parseInt(producto.cost) >= precioMin && parseInt(producto.cost) <= precioMax
-            );
-            if (datosFiltrados.length === 0) {
-                alert("No hay productos en ese rango");
-            }
-
-            container.innerHTML = "";
-            productList = datosFiltrados; //para actualizar el productList y que se pueda ordenar despues de filtrar por precio
-
-            filtrar(datosFiltrados, filtro); //acá cambié para que no llame a ListarDatos, sino que a filtrar que ya tiene el listardatos, asi cuando se hace click en ordenar funcione.
+            filtrar(filtrarPrecio(productList),filtro);
         });
 
         btnLimpiar.addEventListener("click", function () {
             let precioMin = document.getElementById("inputmin");
             let precioMax = document.getElementById("inputmax");
+            let input = buscador.value.toLowerCase();
+            productList = productListFiltrar.filter(item => item.name.toLowerCase().includes(input) || item.description.toLowerCase().includes(input) || item.currency.toLowerCase().includes(input) || item.cost.toString().includes(input));
             precioMin.value = "";
             precioMax.value = "";
-
-            productList = [...productListFiltrar] //acá otra vez setea el valor al inicial para que aparezcan todos los productos.
             container.innerHTML = "";
-            ListarDatos(productList);
+            filtrar(filtrarPrecio(productList),filtro);
         })
 
     }
 });
+
+function filtrarPrecio(array) {
+    let precioMin = document.getElementById("inputmin").value;
+    let precioMax = document.getElementById("inputmax").value;
+    let datosSorteados = array;
+    if (precioMax == "") {
+        precioMax = Number.MAX_SAFE_INTEGER;
+    }
+    datosSorteados = array.filter(producto =>
+        parseInt(producto.cost) >= precioMin && parseInt(producto.cost) <= precioMax
+    );
+    return datosSorteados;
+}
 
 function filtrar(array, filtro) {
     let datosSorteados = array;
@@ -132,9 +122,10 @@ function filtrar(array, filtro) {
             }
             return 0;
         })
-    }
+    } 
     container.innerHTML = "";
     ListarDatos(datosSorteados);
+    return datosSorteados;
 }
 
 function ListarDatos(productList) {
