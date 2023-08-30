@@ -125,7 +125,7 @@ function filtrar(array, filtro) {
     } 
     container.innerHTML = "";
     ListarDatos(datosSorteados);
-    return datosSorteados;
+    
 }
 
 function ListarDatos(productList) {
