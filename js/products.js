@@ -30,17 +30,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         btnPrecioAsc.addEventListener("click", function () {
             filtro = "PrecioAsc";
-            filtrar(filtrarPrecio(productList),filtro);
+            filtrar(filtrarPrecio(productList), filtro);
         });
 
         btnPrecioDesc.addEventListener("click", function () {
             filtro = "PrecioDesc";
-            filtrar(filtrarPrecio(productList),filtro);
+            filtrar(filtrarPrecio(productList), filtro);
         });
 
         btnRelevancia.addEventListener("click", function () {
             filtro = "Relevancia";
-            filtrar(filtrarPrecio(productList),filtro);
+            filtrar(filtrarPrecio(productList), filtro);
         });
 
         btnNoFiltro.addEventListener("click", function () {
@@ -48,18 +48,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.innerHTML = "";
             let input = buscador.value.toLowerCase();
             productList = productListFiltrar.filter(item => item.name.toLowerCase().includes(input) || item.description.toLowerCase().includes(input) || item.currency.toLowerCase().includes(input) || item.cost.toString().includes(input));
-            filtrar(filtrarPrecio(productList),filtro);
+            filtrar(filtrarPrecio(productList), filtro);
         });
 
         buscador.addEventListener("input", function () {
             let input = buscador.value.toLowerCase();
             productList = productListFiltrar.filter(item => item.name.toLowerCase().includes(input) || item.description.toLowerCase().includes(input) || item.currency.toLowerCase().includes(input) || item.cost.toString().includes(input));
             container.innerHTML = "";
-            filtrar(filtrarPrecio(productList),filtro);
+            filtrar(filtrarPrecio(productList), filtro);
         });
 
         btnFiltrar.addEventListener("click", function () {
-            filtrar(filtrarPrecio(productList),filtro);
+            filtrar(filtrarPrecio(productList), filtro);
         });
 
         btnLimpiar.addEventListener("click", function () {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             precioMin.value = "";
             precioMax.value = "";
             container.innerHTML = "";
-            filtrar(filtrarPrecio(productList),filtro);
+            filtrar(filtrarPrecio(productList), filtro);
         })
 
     }
@@ -122,11 +122,22 @@ function filtrar(array, filtro) {
             }
             return 0;
         })
-    } 
+    }
     container.innerHTML = "";
     ListarDatos(datosSorteados);
-    
+
 }
+
+//AGREGU'E ESTE PARA QUE AL HACER CLICK SE GUARDE EN EL LOCAL Y ME MANDE A LA OTRA PAGINA
+
+function guardarProductos(productoId) {
+    console.log("hiciste click")
+    localStorage.setItem("productoSeleccionado", productoId);
+    console.log(productoId)
+    window.location.href = "product-info.html"
+}
+
+
 
 function ListarDatos(productList) {
     const container = document.getElementById('container');
@@ -141,7 +152,7 @@ function ListarDatos(productList) {
 
         const productsList = document.createElement('div');
         productsList.innerHTML = `
-        <div onclick="setCatID(${prodList.id})" class="list-group-item list-group-item-action cursor-active">
+        <div onclick="guardarProductos(${prodList.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
                         <img src="${image}" alt="${prodList.image}" class="img-thumbnail">
@@ -158,4 +169,7 @@ function ListarDatos(productList) {
             </div>`;
         container.appendChild(productsList);
     })
+
+
 }
+
