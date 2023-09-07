@@ -5,26 +5,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectedId = localStorage.getItem("productoSeleccionado");
     console.log(selectedId);
 
-
     const responseId = await getJSONData(PRODUCT_INFO_URL + selectedId + EXT_TYPE);
     let producto = responseId.data;
     console.log(producto);
 
     prod.innerHTML = `
-    <div style="width:100%; display:flex; flex-direction:row" id="principal">  
-        <div style="display:flex; flex-direction:column; width:40%">
-            <h1>${producto.name}</h1> 
-            <hr> 
-            <p>Precio  <br> ${producto.currency}
-            ${producto.cost} </p>
-            <p>Descripción <br> ${producto.description} </p>
-            <p>Categoría <br>  ${producto.category}</p>
-            <p>Cantidad de vendidos <br> ${producto.soldCount}</p>
-        </div>
-        <div style="display:flex; flex-direction:row; overflow:auto; width:60%" id="imagen">
+    <div class="container">
+        <div class="column" id="principal">
+            <div class="col-md-6">
+                <h1>${producto.name}</h1>
+                <hr>
+                <p><strong>Precio</strong><br> ${producto.currency} ${producto.cost}</p>
+                <p><strong>Descripción</strong><br> ${producto.description}</p>
+                <p><strong>Categoría</strong><br> ${producto.category}</p>
+                <p><strong>Cantidad de vendidos</strong><br> ${producto.soldCount}</p>
+            </div>
+
+            <div id="imagen">
+            </div>
+
+            <div class="mt-5">
+                <h3 >Comentarios</h3>
+                    <ul id="comentariosParrafo" class="list-group"></ul>
+            </div>
         </div>
     </div>
-    `
+    `;
+
     const infoProducto = document.getElementById("principal");
     const imagen = document.getElementById("imagen");
     prod.appendChild(infoProducto);
@@ -32,31 +39,39 @@ document.addEventListener('DOMContentLoaded', async () => {
     producto.images.forEach(image => {
         let img = document.createElement('img');
         img.src = image;
-        imagen.appendChild(img);   
+        img.classList.add('img-fluid', 'col-2', 'm-2');
+        imagen.appendChild(img);
+    });
+    
+
+    //Esto es lo que agregu'e para traer los comentarios
+    const obtenerComentarios = await getJSONData(PRODUCT_INFO_COMMENTS_URL + selectedId + EXT_TYPE);
+    let comentarios = obtenerComentarios.data;
+    console.log(comentarios);
+
+    let listaComentarios = document.createElement('ul');
+
+    listaComentarios.classList.add('list-group');
+
+    comentarios.forEach(comentario => {
+        let listItem = document.createElement('li');
+        listItem.classList.add('list-group-item');
+        let name = comentario.user;
+        let date = comentario.dateTime;
+        let score = comentario.score;
+        let description = comentario.description;
+
+        listItem.innerHTML = `
+            <strong>${name} </strong> 
+            ${date}
+            ${score}
+            <p>${description}</p>
+        `;
+
+        listaComentarios.appendChild(listItem);
     });
 
+    let comentariosParrafo = document.getElementById('comentariosParrafo');
+    comentariosParrafo.appendChild(listaComentarios);
 
 });
-
-    // Habria que crear un for in o algo para recorrer el objeto y despues hacer el append
-
-
-
-
-
-    // let name = producto.name;
-    // let description = prodList.description;
-    // let price = prodList.cost;
-    // let currency = prodList.currency;
-    // let soldCount = prodList.soldCount;
-    // let image = prodList.image;
-
-    // console.log(name)
-
-
-
-
-
-
-
-
