@@ -1,0 +1,40 @@
+
+.container{
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    
+}
+
+#principal{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+   
+    
+}
+
+#info{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#imagen{
+    width: 15%;
+    align-items: flex-end;
+}
+
+#fotogrande{
+    width: 600px;
+    padding-top: 15px;
+}
+
+
+#imagen img{
+    width: 150px;
+    margin: 10px;
+    cursor: pointer;
+}
