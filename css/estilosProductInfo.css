@@ -1,25 +1,36 @@
+body{
+    background-color: #ebebeb;
+}
 
 .container{
+    
+    
     width: 100%;
     display: flex;
     padding: 10px;
-    
 }
 
 #principal{
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
+    border: 2px solid #a2a4a3;
+    border-radius: 5px;
     width: 100%;
+    height: 40vh;
     display: flex;
     flex-direction: row;
     justify-content:space-around;
-   
+    align-items: center;
+   margin-bottom: 30px;
+   margin-top: 50px;
     
 }
-
+/*background-color: #ebebeb;*/
 #info{
     width: 55%;
     display: flex;
     flex-direction: column;
-    
+    border-bottom: 10px solid rgb(20, 1, 1);
 }
 
 #imagen{
@@ -34,7 +45,9 @@
 
 
 #imagen img{
+    border:1px solid #a2a4a3;
     width: 150px;
     margin: 10px;
     cursor: pointer;
 }
+

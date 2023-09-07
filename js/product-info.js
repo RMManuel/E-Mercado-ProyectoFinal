@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         listItem.innerHTML = `
             <strong>${name} </strong> 
-            ${date}
+            <small class="text-muted">${date} </small>
             ${score}
             ${stars}
             <p>${description}</p>
