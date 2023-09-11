@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     
     function mostrarImagenGrande() {
-    imagenGrande.innerHTML = `<img id="fotogrande" src="${imagenes[indiceImagenActual]}" alt="Imagen grande">`;
+    imagenGrande.innerHTML = `<div id="fotogrande"><img src="${imagenes[indiceImagenActual]}" alt="Imagen grande"></div>`;
     }
     
         
