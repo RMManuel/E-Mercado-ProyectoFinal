@@ -69,6 +69,15 @@ body{
     width: 70%;
 }
 
+#cajacomentarios {
+    margin-left: 5%;
+    width: 30%;
+}
+
+#txtareaOpinion {
+    width: 100%;
+}
+
 .bold {
     font-weight: bold;
 }
@@ -79,7 +88,7 @@ body{
 }
 
 #btnEnviar {
-    width: 30%;
+    width: 80px;
     background-color: #dc3545;
     border-color: #dc3545;
 }

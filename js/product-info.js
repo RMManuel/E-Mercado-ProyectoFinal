@@ -84,7 +84,8 @@ function listarComentarios(comentarios){
     comentarios.forEach(comentario => {
         comentariosParrafo.innerHTML = `
             <hr>
-            <h3>Comentarios</h3>`; 
+            <h3>Comentarios</h3>
+            <br>`; 
 
         let listItem = document.createElement('li');
         listItem.classList.add('list-group-item');
