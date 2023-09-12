@@ -46,7 +46,25 @@
   </nav>
   <main>
     <div class="container" id="info-producto">
-      
+        <div id="cajaproducto" class="container">
+        </div>
+        <div id="contenedor-doble">
+          <div id="comentariosParrafo">
+          </div>
+          <div id="cajacomentarios">
+            <hr>
+            <h3>Comentar</h3>
+            <label for="opinion">Tu opinión:</label><textarea name="opinion" id="txtareaOpinion" cols="30" rows="3"></textarea>
+            <label for="selPuntaje">Tu puntuación</label><select name="selPuntaje" id="selectionPuntaje">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button class="btn btn-primary" id="btnEnviar" type="submit">Enviar</button>
+            </div>
+        </div>
     </div>
     
   </main>

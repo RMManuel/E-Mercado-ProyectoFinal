@@ -5,19 +5,23 @@ body{
 .container{
     width: 100%;
     display: flex;
-    padding: 10px;
 }
 
-#principal{
+#info-producto{
     background-color:white;
     padding: 25px;
     border: 2px solid #a2a4a3;
     border-radius: 5px;
     width: 100%;
-    height: auto;
-    display: flex;
-    margin-bottom: 30px;
+    height: 1024px;
+    justify-content: space-around;
+    
     margin-top: 50px;
+}
+
+#principal{
+    display: flex;
+    
 }
 /*background-color: #ebebeb;*/
 .info{
@@ -53,4 +57,14 @@ body{
     margin: 10px;
     cursor: pointer;
 }
+
+#contenedor-doble{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+
 
