@@ -8,22 +8,20 @@ body{
 }
 
 #info-producto{
+    justify-content: space-around;
     background-color:white;
-    padding: 25px;
     border: 2px solid #a2a4a3;
     border-radius: 5px;
     width: 100%;
-    height: 1024px;
-    justify-content: space-around;
-    
+    height: 100%;
     margin-top: 50px;
+    padding: 50px;
 }
 
 #principal{
-    display: flex;
-    
+    display: flex;   
 }
-/*background-color: #ebebeb;*/
+
 .info{
     width: 55%;
     display: flex;
@@ -44,11 +42,11 @@ body{
     align-items: center;
     margin: auto;
 }
+
 #fotogrande img{
     width: 100%;
     height: auto;
 }
-
 
 #imagen img{
     border:1px solid #a2a4a3;
@@ -62,9 +60,26 @@ body{
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    padding-bottom: 50px;
+    padding-top: 100px;
+    justify-content: space-between;
 }
 
+#comentariosParrafo {
+    width: 70%;
+}
 
+.bold {
+    font-weight: bold;
+}
 
+.list-group-item {
+    width: 100%;
+    word-wrap: break-word;
+}
 
+#btnEnviar {
+    width: 30%;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
