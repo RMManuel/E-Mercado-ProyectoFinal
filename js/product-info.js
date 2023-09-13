@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const obtenerComentarios = await getJSONData(PRODUCT_INFO_COMMENTS_URL + selectedId + EXT_TYPE);
     let comentarios = obtenerComentarios.data;
 
-    // Con esta linea lo que hago es verificar si hay comentarios en el localStorage
-    const comentariosGuardados = JSON.parse(localStorage.getItem('comentarios'));
+    // Con esta linea lo que hago es verificar si hay comentarios en el localStorage, con selectedId lo que hago es que no se guarde el comentario en todos los productos, sino asignarle una clave del id del producto
+    const comentariosGuardados = JSON.parse(localStorage.getItem(`comentarios_${selectedId}`));
 
     //Si hay comentarios, la variable comentarios pasa a ser como comentariosGuardados asi muestra los del localstorage tambien
     if (comentariosGuardados) {
@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         comentarios.push(comentarioNuevo);
 
-        // Agrego esta linea para guardar los comentarios en el local!
-        localStorage.setItem('comentarios', JSON.stringify(comentarios));
+        // Agrego esta linea para guardar los comentarios en el local! con la variable selectedId le damos la clave que sea solo del producto seleccionado y no aparezca el mismo comentario en todos los productos
+        localStorage.setItem(`comentarios_${selectedId}`, JSON.stringify(comentarios));
 
         document.getElementById("txtareaOpinion").value = "";
         document.getElementById("selectionPuntaje").value = "1";
