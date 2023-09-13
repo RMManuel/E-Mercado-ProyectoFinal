@@ -27,29 +27,38 @@ document.addEventListener('DOMContentLoaded', async () => {
     const imagenContainer = document.getElementById("imagen");
     const imagenes = producto.images;
     let indiceImagenActual = 0;
-    
+
     function mostrarImagenGrande() {
-    imagenGrande.innerHTML = `<div id="fotogrande"><img src="${imagenes[indiceImagenActual]}" alt="Imagen grande"></div>`;
+        imagenGrande.innerHTML = `<div id="fotogrande"><img src="${imagenes[indiceImagenActual]}" alt="Imagen grande"></div>`;
     }
-    
+
     mostrarImagenGrande();
-    
+
     imagenes.forEach((image, index) => {
-    let img = document.createElement('img');
-    img.src = image;
-    img.id = `imagen-${index}`;
-    imagenContainer.appendChild(img);
-    
-    //Función click foto
-    img.addEventListener('click', () => {
-        indiceImagenActual = index;
-        mostrarImagenGrande();
-    });
+        let img = document.createElement('img');
+        img.src = image;
+        img.id = `imagen-${index}`;
+        imagenContainer.appendChild(img);
+
+        //Función click foto
+        img.addEventListener('click', () => {
+            indiceImagenActual = index;
+            mostrarImagenGrande();
+        });
     });
 
-    //COMENTARIOS
+    //Y Obtener los comentarios 
     const obtenerComentarios = await getJSONData(PRODUCT_INFO_COMMENTS_URL + selectedId + EXT_TYPE);
     let comentarios = obtenerComentarios.data;
+
+    // Con esta linea lo que hago es verificar si hay comentarios en el localStorage
+    const comentariosGuardados = JSON.parse(localStorage.getItem('comentarios'));
+
+    //Si hay comentarios, la variable comentarios pasa a ser como comentariosGuardados asi muestra los del localstorage tambien
+    if (comentariosGuardados) {
+        comentarios = comentariosGuardados;
+    }
+
     listarComentarios(comentarios);
 
     let btn = document.getElementById("btnEnviar");
@@ -67,15 +76,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         comentarios.push(comentarioNuevo);
+
+        // Agrego esta linea para guardar los comentarios en el local!
+        localStorage.setItem('comentarios', JSON.stringify(comentarios));
+
         document.getElementById("txtareaOpinion").value = "";
         document.getElementById("selectionPuntaje").value = "1";
         listarComentarios(comentarios);
-        
+
     })
 
 })
 
-function listarComentarios(comentarios){
+function listarComentarios(comentarios) {
 
     let listaComentarios = document.createElement('ul');
 
@@ -85,7 +98,7 @@ function listarComentarios(comentarios){
         comentariosParrafo.innerHTML = `
             <hr>
             <h3>Comentarios</h3>
-            <br>`; 
+            <br>`;
 
         let listItem = document.createElement('li');
         listItem.classList.add('list-group-item');
@@ -95,11 +108,11 @@ function listarComentarios(comentarios){
         let score = comentario.score;
         let description = comentario.description;
         let stars = "";
-        
-        for(var i = 1; i <= score; i++) {
+
+        for (var i = 1; i <= score; i++) {
             stars += `<i class="fa fa-star checked"></i>`;
         }
-        for(var j = 1; j <= (5-score); j++) {
+        for (var j = 1; j <= (5 - score); j++) {
             stars += `<i class="fa fa-star"></i>`;
         }
 
