@@ -1,0 +1,46 @@
+body{ /*le saca los bordes al banner*/
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;    background-color: #F5F5F5; /* si manuel , es el color de ml*/
+}
+.centrador{/* centra la caja general*/
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 80hv; 
+}
+
+input[type="text"],
+input[type="password"],
+input[type="mail"] {
+    border-radius: 10px; /* Ajusta el valor según el nivel de redondeo deseado */
+    border: 1px solid #8b8e9b; /* Borde opcional */
+    padding: 5px; 
+    background-color: #cee1ec; /* Cambia el color de fondo cuando está seleccionado */
+    
+}
+
+.formulario{ /*es el bloque de los form*/
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 60%;
+    height: 100%;
+    background-color: white;
+    align-content: stretch;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-gap: 10px; 
+}
+
+.reg{ /* titulo solo */
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center; 
+}
+  .banner img {
+    width: 100%; /*el banner imagen*/
+    height: 70px;
+  }
+  

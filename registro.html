@@ -3,40 +3,69 @@
 <head>
     <title>Registro de Usuarios</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: rgb(248, 249, 250);
-        }
-    </style>
+
+    <link href="css/registro.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-    <h2>Registro de Usuarios</h2>
-    <form id="registroForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre completo" required><br><br>
+    <div class="banner">
+        <img src="img/banner.jpg" alt="">
+        <div class="reg"><h2>Ingrese sus datos</h2></div> 
+    </div>
+    
+        <div class="fondo"> <!--Fondo del pagina-->
+           
+        <div class="centrador">
+            
+        <form class="formulario" id="registroForm">
+            
+          <div class="datos">
+                <label for="nombre">Nombre:</label><br>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre " required><br><br>
+                <span>Ingresalo como figura en su cedula de identidad</span><br><br><br><br>
+            </div>
 
-        <label for="contrasena" >Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required ><br><br>
-        <div class="form-group">
-            <label>
-                <input type="checkbox" name="RememberMe" id="aceptarTerminos" required>
-                Acepto los <a href="term.html">términos y condiciones</a>
-            </label>
-        </div>
-        <div class="form-group"></div>
-        <input style="justify-content:center;" type="submit" value="Registrarse">
-         </p>
-    </form>
-</div>
+            <div class="datos">
+                <label for="apellido">Apellido:</label><br>
+                <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido " required><br><br>
+                <span>Ingresalo como figura en su cedula de identidad</span><br><br><br><br>    
+          </div>
 
-    <div class="mt-5">
+          <div class="datos">
+                <label for="nombre">E-mail:</label><br>
+                <input type="mail" id="mail" name="Mail" placeholder="Mail" required><br><br>
+                
+
+          </div>
+          <div class="datos">
+                <label for="contrasena" >Contraseña:</label><br>
+                <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required ><br>
+          </div>
+          
+          
+          <div class="form-group">
+              <label>
+                  <input type="checkbox" name="RememberMe" id="aceptarTerminos" required>
+                  Acepto los <a href="term.html">términos y condiciones</a>
+              </label>
+          </div>
+          
         
+          <div class="form-group"><input style="justify-content:center;" type="submit" value="Registrarse"></div>
+         
+          
+      </form>
+    </div><!--fin div fndo pag-->
     </div>
 
-   
+
+
+    </div>
+
+
+
+
+
+   </div>
    </body>
    <script src="js/registro.js"></script>
 </html>
