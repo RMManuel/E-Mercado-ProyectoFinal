@@ -225,4 +225,22 @@ button {
 button:hover {
   background-color: #56a0f0;
 }
+-------------------------------------------------------------------------------------------
+body.day-mode .bg-light {
+  background-color: #ffffff !important; /* Puedes usar !important si es necesario */
+  color: #000000 !important;
+}
 
+/* Estilos para el modo de noche */
+body.night-mode .bg-light {
+  background-color: #000000 !important;
+  color: #b6afaf !important;
+}
+body.night-mode .text-muted{
+  background-color: #000000 !important;
+  color: #818b8b;
+}
+body.day-mode .text-muted{
+  background-color: #f5f5f5 !important;
+  color: #000;
+}

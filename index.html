@@ -5,14 +5,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-
+  <link href="css/bootstrap.min.css" rel="stylesheet">  
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 
 </head>
 
-<body>
+<body class="day-mode">
   
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
@@ -32,11 +32,22 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item mx-5">
-              <a class="nav-link" href="my-profile.html" id="username"></a>
-            </li>
-            <li class="nav-item mx-5">
-              <button id="logoutButton" class="btn btn-danger" style="display: none;">Cerrar sesión</button>
-            </li>
+            <button id="boton-modo-noche" class="btn btn-secondary">Noche</button>
+          </li>
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              
+              <li><a class="dropdown-item" href="cart.html">Carrito</a></li>
+              <li><a class="dropdown-item" href="#">Algo más aqui</a></li>
+              <li><a class="dropdown-item" href="my-profile.html" id="username">Mi perfil</a></li>
+              <button id="logoutButton" class="btn" style="display: none;">Cerrar sesión</button>
+              <button id="toggle-mode">Cambiar Modo</button>
+
+            </ul>
+          </div>
         </ul>
       </div>
     </div>

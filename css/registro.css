@@ -7,7 +7,7 @@ body{ /*le saca los bordes al banner*/
     display: flex;
     justify-content: center; 
     align-items: center; 
-    height: 80hv; 
+    height: 50hv; 
 }
 
 input[type="text"],
@@ -19,28 +19,29 @@ input[type="mail"] {
     background-color: #cee1ec; /* Cambia el color de fondo cuando está seleccionado */
     
 }
-
+.boton{
+    padding-left: 20%;
+    border-radius: 5%;
+}
 .formulario{ /*es el bloque de los form*/
     font-family: Arial, Helvetica, sans-serif;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    padding-left: 10%;
-    padding-right: 10%;
-    width: 60%;
-    height: 100%;
+    
+    width: 30%;
+    height: 60%;
     background-color: white;
-    align-content: stretch;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    grid-gap: 10px; 
+    display: table-column;
+    padding-left: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 
 .reg{ /* titulo solo */
     font-family: Arial, Helvetica, sans-serif;
-    text-align: center; 
+    text-align: left; 
+    padding-left: 30%;
 }
   .banner img {
     width: 100%; /*el banner imagen*/
-    height: 70px;
+    height: 55px;
   }
-  
+
