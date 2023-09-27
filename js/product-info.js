@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectedId = localStorage.getItem("productoSeleccionado");
     const responseId = await getJSONData(PRODUCT_INFO_URL + selectedId + EXT_TYPE);
     let producto = responseId.data;
+    let relatedProducts= producto.relatedProducts;
 
     prod.innerHTML += `
         <div class="info">
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     listarComentarios(comentarios);
+    listarRelatedProducts(relatedProducts);
 
     let btn = document.getElementById("btnEnviar");
 
@@ -89,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 function listarComentarios(comentarios) {
-
+    let comentariosParrafo=document.getElementById('comentariosParrafo')
     let listaComentarios = document.createElement('ul');
 
     listaComentarios.classList.add('list-group');
@@ -125,5 +127,28 @@ function listarComentarios(comentarios) {
         listaComentarios.appendChild(listItem);
         comentariosParrafo.appendChild(listaComentarios);
     })
+}
+
+function listarRelatedProducts(array){
+    let principal=document.getElementById('info-producto')
+    let contenedorRP=document.createElement('div')
+    contenedorRP.innerHTML=`
+        <hr>
+        <h3>Productos Relacionados</h3>
+        <br>`
+    contenedorRP.classList.add('cont-prodRelacionados')
+    array.forEach(i => {
+        let contProducto=document.createElement('div')
+        contProducto.classList.add('card','bd-placeholder-img','card-img-top')
+        let name=i.name
+        let img=i.image
+        console.log(i)
+        contProducto.innerHTML+=`
+        <strong>${name}</strong>
+        <img src="${img}"></img>`
+
+        contenedorRP.appendChild(contProducto)
+    });
+    principal.appendChild(contenedorRP)
 }
 

@@ -131,7 +131,6 @@ function filtrar(array, filtro) {
 //AGREGU'E ESTE PARA QUE AL HACER CLICK SE GUARDE EN EL LOCAL Y ME MANDE A LA OTRA PAGINA
 
 function guardarProductos(productoId) {
-    console.log("hiciste click")
     localStorage.setItem("productoSeleccionado", productoId);
     console.log(productoId)
     window.location.href = "product-info.html"
