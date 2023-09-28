@@ -87,10 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         listarComentarios(comentarios);
 
     })
-    let PRcont=document.getElementsByClassName('card')
-    PRcont.addEventListener('click',()=>{
-        guardarProductos()
-    })
+   
 
 })
 
@@ -144,17 +141,17 @@ function listarRelatedProducts(array){
     contenedorRP.classList.add('cont-prodRelacionados')
     array.forEach(i => {
         let contProducto=document.createElement('div')
-        contProducto.classList.add('card','bd-placeholder-img','card-img-top')
+        contProducto.classList.add('card','bd-placeholder-img', 'cursor-active','card-img-top')
         let id=i.id
         contProducto.setAttribute('id',id)
         let name=i.name
         let img=i.image
         console.log(i)
         contProducto.innerHTML+=`
-        <a href="products-info.html">
+        
             <strong>${name}</strong>
-            <img src="${img}"></img>
-        </a>`
+            <img onclick="guardarProductos(${id})" src="${img}"></img>
+        `
 
         contenedorRP.appendChild(contProducto)
     });
