@@ -225,3 +225,11 @@ button {
 button:hover {
   background-color: #56a0f0;
 }
+
+.borde-gris {
+  border-color: #6e6e6e;
+}
+
+#filtrarPrecio, #filtrarLimpiar {
+  border-radius: 3px;
+}
