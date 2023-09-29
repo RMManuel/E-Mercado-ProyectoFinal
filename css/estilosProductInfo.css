@@ -28,32 +28,19 @@
     flex-direction: column;
 }
 
-#imagen{
-    width: 15%;
-    margin: auto;
-    align-items: flex-end;
-}
-
-#fotogrande{
-    width: 80%;
+#imagen-grande{
+    width: 50%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
+    padding-left: 10px;
 }
 
-#fotogrande img{
+#imagen-grande img{
     width: 100%;
     height: auto;
-}
-
-#imagen img{
-    border:1px solid #a2a4a3;
-    width: 80%;
-    height: auto;
-    margin: 10px;
-    cursor: pointer;
 }
 
 #contenedor-doble{

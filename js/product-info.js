@@ -19,34 +19,37 @@ document.addEventListener('DOMContentLoaded', async () => {
             <p><span class="bold">Cantidad de vendidos</span>:<br>${producto.soldCount}</p>
         </div>
         <div id="imagen-grande">
-        </div>
-        <div id="imagen">
         </div>`;
 
     //IMAGENES
     const imagenGrande = document.getElementById("imagen-grande");
-    const imagenContainer = document.getElementById("imagen");
     const imagenes = producto.images;
-    let indiceImagenActual = 0;
 
-    function mostrarImagenGrande() {
-        imagenGrande.innerHTML = `<div id="fotogrande"><img src="${imagenes[indiceImagenActual]}" alt="Imagen grande"></div>`;
-    }
-
-    mostrarImagenGrande();
-
-    imagenes.forEach((image, index) => {
-        let img = document.createElement('img');
-        img.src = image;
-        img.id = `imagen-${index}`;
-        imagenContainer.appendChild(img);
-
-        //Función click foto
-        img.addEventListener('click', () => {
-            indiceImagenActual = index;
-            mostrarImagenGrande();
-        });
-    });
+    imagenGrande.innerHTML = `
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="${imagenes[0]}">
+            </div>
+            <div class="carousel-item">
+                <img src="${imagenes[1]}">
+            </div>
+            <div class="carousel-item">
+                <img src="${imagenes[2]}">
+            </div>
+            <div class="carousel-item">
+                <img src="${imagenes[3]}">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>`;
 
     //Y Obtener los comentarios 
     const obtenerComentarios = await getJSONData(PRODUCT_INFO_COMMENTS_URL + selectedId + EXT_TYPE);
@@ -87,7 +90,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         listarComentarios(comentarios);
 
     })
-   
 
 })
 
@@ -131,31 +133,28 @@ function listarComentarios(comentarios) {
 }
 
 function listarRelatedProducts(array){
-    let principal=document.getElementById('info-producto')
-    let titulo=document.createElement('div')
-    let contenedorRP=document.createElement('div')
+    let principal=document.getElementById('info-producto');
+    let titulo=document.createElement('div');
+    let contenedorRP=document.createElement('div');
     titulo.innerHTML=`
         <hr>
         <h3>Productos Relacionados</h3>
         <br>`
-    contenedorRP.classList.add('cont-prodRelacionados')
+    contenedorRP.classList.add('cont-prodRelacionados');
     array.forEach(i => {
-        let contProducto=document.createElement('div')
-        contProducto.classList.add('card','bd-placeholder-img', 'cursor-active','card-img-top')
-        let id=i.id
-        contProducto.setAttribute('id',id)
-        let name=i.name
-        let img=i.image
-        console.log(i)
+        let contProducto=document.createElement('div');
+        contProducto.classList.add('card','bd-placeholder-img', 'cursor-active','card-img-top');
+        let id=i.id;
+        let name=i.name;
+        let img=i.image;
         contProducto.innerHTML+=`
         
-            <strong>${name}</strong>
+            <h5 class="p-1">${name}</h5>
             <img onclick="guardarProductos(${id})" src="${img}"></img>
         `
-
-        contenedorRP.appendChild(contProducto)
+        contenedorRP.appendChild(contProducto);
     });
-    principal.appendChild(titulo)
-    principal.appendChild(contenedorRP)
+    principal.appendChild(titulo);
+    principal.appendChild(contenedorRP);
 }
 

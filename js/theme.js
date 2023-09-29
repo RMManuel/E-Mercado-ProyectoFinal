@@ -9,8 +9,6 @@ function loadThemeFromLocalStorage() {
 }
 
 darkLight.addEventListener("click", () => {
-    console.log("hiciste click");
-
     let element = document.body;
     element.dataset.bsTheme = element.dataset.bsTheme == "light" ? "dark" : "light";
     saveThemeToLocalStorage(element.dataset.bsTheme);
