@@ -1,13 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-    traerProductosCart();
+    cargarProductosCart();
 });
 
+async function cargarProductosCart() {
+    let articulos = await obtenerProductosCart();
 
-async function traerProductosCart() {
+    // Llamar a una función para mostrar los productos
+    mostrarProductosCart(articulos);
+}
+
+async function obtenerProductosCart() {
     let respCarrito = await getJSONData(CART_INFO_URL + "25801" + EXT_TYPE);
-    let infoCart = respCarrito.data
-    let articulos = infoCart.articles
+    let infoCart = respCarrito.data;
+    let articulos = infoCart.articles;
+    return articulos;
+}
 
+function mostrarProductosCart(articulos) {
     // tablacontainer
     let contenidoCarrito = document.getElementById('contenidoCarrito')
 
@@ -50,4 +59,4 @@ async function traerProductosCart() {
     tabla.appendChild(cuerpoTabla);
 
     contenidoCarrito.appendChild(tabla);
-} 
+}
