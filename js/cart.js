@@ -44,12 +44,15 @@ function mostrarProductosCart(articulos) {
         let moneda = art.currency;
         let img = art.image;
 
+        
+        let subtotal = costo * cantidad;
+
         fila.innerHTML = `
             <td><img src="${img}" alt="${nombre}" width="100"></td>
             <td>${nombre}</td>
-            <td>${moneda} ${costo}</td>
-            <td><input type="number" value="${cantidad}"></td>
-            <td>${moneda} ${costo * cantidad} </td>
+            <td>${moneda} <span id="costo"> ${costo} </span </td>
+            <td><input type="number" min=1 onchange="actualizarSub()" id="cantidad" value="${cantidad}"></td>
+            <td> ${moneda} <span id='subtotal'> ${subtotal} </span> </td>
         `;
 
         cuerpoTabla.appendChild(fila);
@@ -59,4 +62,18 @@ function mostrarProductosCart(articulos) {
     tabla.appendChild(cuerpoTabla);
 
     contenidoCarrito.appendChild(tabla);
+}
+
+function actualizarSub() {
+    let inputCantidad = document.getElementById("cantidad");
+    let getCosto = document.getElementById('costo')
+    let currentcosto = parseInt(getCosto.textContent);
+
+    let cantidadActual = parseInt(inputCantidad.value);
+    let nuevoSubtotal = cantidadActual * currentcosto;
+    
+    
+    let mostrarnuevosubtotal = document.getElementById('subtotal')
+    mostrarnuevosubtotal.innerHTML = `${nuevoSubtotal}`
+    
 }
