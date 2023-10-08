@@ -1,27 +1,51 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const prod = document.getElementById('principal');
-    const selectedId = localStorage.getItem("productoSeleccionado");
+    let producto = await obtenerProductoSeleccionado();
+    let coment = await obtenerComentariosSeleccionado();
+    let relatedProducts = producto.relatedProducts;
+
+    mostrarProductoSeleccionado(producto)
+    mostrarImgProducto(producto)
+    listarRelatedProducts(relatedProducts);
+    listarComentarios(coment);
+
+})
+
+const selectedId = localStorage.getItem("productoSeleccionado");
+
+
+
+async function obtenerProductoSeleccionado() {
     const responseId = await getJSONData(PRODUCT_INFO_URL + selectedId + EXT_TYPE);
     let producto = responseId.data;
-    let relatedProducts= producto.relatedProducts;
 
-    prod.innerHTML += `
-        <div class="info">
-            <div id="Nombre">
-                <hr>
-                <h1>${producto.name}</h1>
-                <hr>
-            </div>
-            <p><span class="bold">Precio</span>:<br>${producto.currency}:${producto.cost}</p>
-            <p><span class="bold">Descripción:</span><br>${producto.description}</p>
-            <p><span class="bold">Categoría</span>:<br>${producto.category}</p>
-            <p><span class="bold">Cantidad de vendidos</span>:<br>${producto.soldCount}</p>
+    return producto
+}
+
+function mostrarProductoSeleccionado(producto) {
+
+    const idProductosPrincipal = document.getElementById('principal');
+
+    idProductosPrincipal.innerHTML += `
+    <div class="info">
+        <div id="Nombre">
+            <hr>
+            <h1>${producto.name}</h1>
+            <hr>
         </div>
-        <div id="imagen-grande">
-        </div>`;
+        <p><span class="bold">Precio</span>:<br>${producto.currency}:${producto.cost}</p>
+        <p><span class="bold">Descripción:</span><br>${producto.description}</p>
+        <p><span class="bold">Categoría</span>:<br>${producto.category}</p>
+        <p><span class="bold">Cantidad de vendidos</span>:<br>${producto.soldCount}</p>
+        <button id="agregarAlCarrito" onclick='agregarAlCarrito()' >Agregar al carrito</button>
+    </div>
+    <div id="imagen-grande">
+    </div>
+    
+    `;
+}
 
-    //IMAGENES
+function mostrarImgProducto(producto) {
     const imagenGrande = document.getElementById("imagen-grande");
     const imagenes = producto.images;
 
@@ -51,27 +75,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         </button>
     </div>`;
 
-    //Y Obtener los comentarios 
-    const obtenerComentarios = await getJSONData(PRODUCT_INFO_COMMENTS_URL + selectedId + EXT_TYPE);
+}
+
+//Y Obtener los comentarios 
+async function obtenerComentariosSeleccionado() {
+
+    let obtenerComentarios = await getJSONData(PRODUCT_INFO_COMMENTS_URL + selectedId + EXT_TYPE);
     let comentarios = obtenerComentarios.data;
 
-    // Con esta linea lo que hago es verificar si hay comentarios en el localStorage, con selectedId lo que hago es que no se guarde el comentario en todos los productos, sino asignarle una clave del id del producto
     const comentariosGuardados = JSON.parse(localStorage.getItem(`comentarios_${selectedId}`));
 
-    //Si hay comentarios, la variable comentarios pasa a ser como comentariosGuardados asi muestra los del localstorage tambien
     if (comentariosGuardados) {
         comentarios = comentariosGuardados;
     }
 
-    listarComentarios(comentarios);
-    listarRelatedProducts(relatedProducts);
-
     let btn = document.getElementById("btnEnviar");
-
     btn.addEventListener("click", () => {
+
         let opinion = document.getElementById("txtareaOpinion").value;
         let puntuación = document.getElementById("selectionPuntaje").value;
         let fecha = new Date().toLocaleDateString('en-US');
+
         let comentarioNuevo = {
             product: localStorage.getItem('productoSeleccionado'),
             score: puntuación,
@@ -82,7 +106,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         comentarios.push(comentarioNuevo);
 
-        // Agrego esta linea para guardar los comentarios en el local! con la variable selectedId le damos la clave que sea solo del producto seleccionado y no aparezca el mismo comentario en todos los productos
         localStorage.setItem(`comentarios_${selectedId}`, JSON.stringify(comentarios));
 
         document.getElementById("txtareaOpinion").value = "";
@@ -91,10 +114,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     })
 
-})
+    return comentarios;
+}
+
+
+function agregarAlCarrito() {
+    localStorage.setItem('productosEnCarrito', `${selectedId}`)
+    console.log("agregaste al carrito")
+}
 
 function listarComentarios(comentarios) {
-    let comentariosParrafo=document.getElementById('comentariosParrafo')
+    let comentariosParrafo = document.getElementById('comentariosParrafo')
     let listaComentarios = document.createElement('ul');
 
     listaComentarios.classList.add('list-group');
@@ -132,22 +162,22 @@ function listarComentarios(comentarios) {
     })
 }
 
-function listarRelatedProducts(array){
-    let principal=document.getElementById('info-producto');
-    let titulo=document.createElement('div');
-    let contenedorRP=document.createElement('div');
-    titulo.innerHTML=`
+function listarRelatedProducts(array) {
+    let principal = document.getElementById('info-producto');
+    let titulo = document.createElement('div');
+    let contenedorRP = document.createElement('div');
+    titulo.innerHTML = `
         <hr>
         <h3>Productos Relacionados</h3>
         <br>`
     contenedorRP.classList.add('cont-prodRelacionados');
     array.forEach(i => {
-        let contProducto=document.createElement('div');
-        contProducto.classList.add('card','bd-placeholder-img', 'cursor-active','card-img-top');
-        let id=i.id;
-        let name=i.name;
-        let img=i.image;
-        contProducto.innerHTML+=`
+        let contProducto = document.createElement('div');
+        contProducto.classList.add('card', 'bd-placeholder-img', 'cursor-active', 'card-img-top');
+        let id = i.id;
+        let name = i.name;
+        let img = i.image;
+        contProducto.innerHTML += `
         
             <h5 class="p-1">${name}</h5>
             <img onclick="guardarProductos(${id})" src="${img}"></img>
@@ -157,4 +187,6 @@ function listarRelatedProducts(array){
     principal.appendChild(titulo);
     principal.appendChild(contenedorRP);
 }
+
+
 
