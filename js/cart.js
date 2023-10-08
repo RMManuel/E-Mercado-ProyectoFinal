@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function cargarProductosCart() {
-    let articulos = await obtenerProductosCart();
+    let art = await obtenerProductosCart();
 
-    // Llamar a una función para mostrar los productos
-    mostrarProductosCart(articulos);
+    
+    mostrarProductosCart(art);
 }
 
 async function obtenerProductosCart() {
@@ -17,13 +17,13 @@ async function obtenerProductosCart() {
 }
 
 function mostrarProductosCart(articulos) {
-    // tablacontainer
+    
     let contenidoCarrito = document.getElementById('contenidoCarrito')
 
     const tabla = document.createElement("table");
     tabla.classList.add("table", "table-striped", "table-bordered");
 
-    // Crear el encabezado de la tabla con clases de Bootstrap
+   
     const encabezado = document.createElement("thead");
     encabezado.innerHTML = `
          <tr>
@@ -44,14 +44,14 @@ function mostrarProductosCart(articulos) {
         let moneda = art.currency;
         let img = art.image;
 
-        
+
         let subtotal = costo * cantidad;
 
         fila.innerHTML = `
             <td><img src="${img}" alt="${nombre}" width="100"></td>
             <td>${nombre}</td>
-            <td>${moneda} <span id="costo"> ${costo} </span </td>
-            <td><input type="number" min=1 onchange="actualizarSub()" id="cantidad" value="${cantidad}"></td>
+            <td>${moneda} <span class="costo"> ${costo} </span </td>
+            <td><input type="number" min=1 onchange="actualizarSub()" class="cantidad" value="${cantidad}"></td>
             <td> ${moneda} <span id='subtotal'> ${subtotal} </span> </td>
         `;
 
@@ -65,15 +65,15 @@ function mostrarProductosCart(articulos) {
 }
 
 function actualizarSub() {
-    let inputCantidad = document.getElementById("cantidad");
-    let getCosto = document.getElementById('costo')
-    let currentcosto = parseInt(getCosto.textContent);
-
-    let cantidadActual = parseInt(inputCantidad.value);
-    let nuevoSubtotal = cantidadActual * currentcosto;
-    
-    
+    let inputCantidad = document.getElementsByClassName("cantidad");
+    let getCosto = document.getElementsByClassName('costo')
     let mostrarnuevosubtotal = document.getElementById('subtotal')
-    mostrarnuevosubtotal.innerHTML = `${nuevoSubtotal}`
-    
+
+    for (let i = 0; i < getCosto.length; i++) {
+        let currentcosto = parseFloat(getCosto[i].textContent);
+        let cantidadActual = parseInt(inputCantidad[i].value);
+        let nuevoSubtotal = cantidadActual * currentcosto;
+
+        mostrarnuevosubtotal.innerHTML = `${nuevoSubtotal}`
+    }
 }
