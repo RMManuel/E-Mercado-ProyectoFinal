@@ -46,7 +46,7 @@ function mostrarProductosCart(articulos) {
             <td><img src="${img}" alt="${nombre}" width="100"></td>
             <td>${nombre}</td>
             <td>${moneda} <span class="costo"> ${costo} </span></td>
-            <td><input type="number" min=1 onchange="actualizarSub()" class="cantidad" value="${cantidad}"></td>
+            <td><input type="number" min=1 onchange="actualizarSub()" class="cantidad" value="${cantidad}" style="width: 100px"></td>
             <td> ${moneda} <span id='subtotal'> ${subtotal} </span> </td>
         `;
 
