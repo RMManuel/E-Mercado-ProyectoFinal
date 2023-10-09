@@ -18,8 +18,7 @@ const selectedId = localStorage.getItem("productoSeleccionado");
 async function obtenerProductoSeleccionado() {
     const responseId = await getJSONData(PRODUCT_INFO_URL + selectedId + EXT_TYPE);
     let producto = responseId.data;
-
-    return producto
+    return producto;
 }
 
 function mostrarProductoSeleccionado(producto) {
@@ -37,12 +36,10 @@ function mostrarProductoSeleccionado(producto) {
         <p><span class="bold">Descripción:</span><br>${producto.description}</p>
         <p><span class="bold">Categoría</span>:<br>${producto.category}</p>
         <p><span class="bold">Cantidad de vendidos</span>:<br>${producto.soldCount}</p>
-        <button id="agregarAlCarrito" onclick='agregarAlCarrito()' >Agregar al carrito</button>
+        <button class="mt-4" id="agregarAlCarrito" onclick='agregarAlCarrito()'>Agregar al carrito</button>
     </div>
     <div id="imagen-grande">
-    </div>
-    
-    `;
+    </div>`;
 }
 
 function mostrarImgProducto(producto) {
@@ -119,12 +116,12 @@ async function obtenerComentariosSeleccionado() {
 
 
 function agregarAlCarrito() {
-    localStorage.setItem('productosEnCarrito', `${selectedId}`)
-    console.log("agregaste al carrito")
+    localStorage.setItem('productosEnCarrito', `${selectedId}`);
+    console.log("agregaste al carrito");
 }
 
 function listarComentarios(comentarios) {
-    let comentariosParrafo = document.getElementById('comentariosParrafo')
+    let comentariosParrafo = document.getElementById('comentariosParrafo');
     let listaComentarios = document.createElement('ul');
 
     listaComentarios.classList.add('list-group');

@@ -58,7 +58,7 @@
   <main>
     <div class="container">
       <div class=" text-center mt-5">
-        <h2>Carrito de compras</h2>
+        <h2 class="pb-4">Carrito de compras</h2>
       </div>
       <div id="contenidoCarrito">
 
@@ -67,23 +67,23 @@
       <!-- Tipo de envio -->
 
       <div>
-        <h3>Tipo de envío</h3>
+        <h4 class="pt-4 pb-2">Tipo de envío</h4>
 
-        <div id="">
-          <input type="radio">Premium 2 a 5 días (15%)</input>
-          <input type="radio">Express 5 a 8 días (7%)</input>
-          <input type="radio">Standard 12 a 15 días (5%)</input>
+        <div>
+          <input type="radio" name="tipoEnvio" value="Premium"> Premium - 2 a 5 días (15%)</input>
+          <input type="radio" name="tipoEnvio" value="Express"> Express - 5 a 8 días (7%)</input>
+          <input type="radio" name="tipoEnvio" value="Standard"> Standard - 12 a 15 días (5%)</input>
         </div>
 
         <div>
-          <h4>Dirección de envío</h4>
-          <label for="">Calle</label>
+          <h4 class="pt-4 pb-2">Dirección de envío</h4>
+          <label for="">Calle:</label>
           <input type="text" name="calle" id="">
 
-          <label for="">Número</label>
+          <label for="">Número:</label>
           <input type="text" name="numero" id="">
 
-          <label for="">Esquina</label>
+          <label for="">Esquina:</label>
           <input type="text" name="esquina" id="">
         </div>
       </div>
