@@ -80,6 +80,13 @@
     border-color: #dc3545;
 }
 
+#agregarAlCarrito {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    width: 30%;
+    min-width: 100px;
+}
+
 .cont-prodRelacionados{
     width: 60%;
     gap: 1%;
