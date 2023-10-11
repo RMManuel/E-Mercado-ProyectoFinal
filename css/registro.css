@@ -1,47 +1,46 @@
-body{ /*le saca los bordes al banner*/
-    margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;    background-color: #F5F5F5; /* si manuel , es el color de ml*/
+body {
+    margin: 0;
+    background-color: #F5F5F5;
 }
-.centrador{/* centra la caja general*/
+
+.centrador {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    height: 50hv; 
+    justify-content: center;
+    
+    height: 100vh;
 }
 
 input[type="text"],
 input[type="password"],
 input[type="mail"] {
-    border-radius: 10px; /* Ajusta el valor según el nivel de redondeo deseado */
-    border: 1px solid #8b8e9b; /* Borde opcional */
-    padding: 5px; 
-    background-color: #cee1ec; /* Cambia el color de fondo cuando está seleccionado */
-    
-}
-.boton{
-    padding-left: 20%;
-    border-radius: 5%;
-}
-.formulario{ /*es el bloque de los form*/
-    font-family: Arial, Helvetica, sans-serif;
-    
-    width: 30%;
-    height: 60%;
-    background-color: white;
-    display: table-column;
-    padding-left: 10%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    border-radius: 10px;
+    border: 1px solid #8b8e9b;
+    padding: 5px;
+    background-color: #cee1ec;
+    width: 100%;
 }
 
-.reg{ /* titulo solo */
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: left; 
-    padding-left: 30%;
+.boton {
+    text-align: center;
 }
-  .banner img {
-    width: 100%; /*el banner imagen*/
-    height: 55px;
-  }
 
+.formulario {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 5%;
+    box-sizing: border-box;
+}
+
+.reg {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 0;
+    padding-top: 1%;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+}
