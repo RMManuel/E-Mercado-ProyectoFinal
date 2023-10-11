@@ -28,21 +28,21 @@ function mostrarProductoSeleccionado(producto) {
     const idProductosPrincipal = document.getElementById('principal');
 
     idProductosPrincipal.innerHTML += `
+    
     <div class="info">
         <div id="Nombre">
             <hr>
             <h1>${producto.name}</h1>
             <hr>
         </div>
+        <div id="imagen-grande"></div>  
         <p><span class="bold">Precio</span>:<br>${producto.currency}:${producto.cost}</p>
         <p><span class="bold">Descripción:</span><br>${producto.description}</p>
         <p><span class="bold">Categoría</span>:<br>${producto.category}</p>
         <p><span class="bold">Cantidad de vendidos</span>:<br>${producto.soldCount}</p>
         <button id="agregarAlCarrito" onclick='agregarAlCarrito(${JSON.stringify(producto)})'>Agregar al carrito</button>
-
-    </div>
-    <div id="imagen-grande">
-    </div>
+        </div>
+    
     
     `;
 
