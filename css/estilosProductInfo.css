@@ -147,7 +147,16 @@
 
 }
 
-@media (max-width: 500px) {
+@media (max-width: 999px) {
+    #agregarAlCarrito {
+
+        width: 100%;
+        
+
+    }
+}
+
+@media (max-width: 750px) {
     .container {
         justify-content: center;
     }
@@ -157,7 +166,10 @@
         padding: 0px;
     }
 
-    #p-1 {}
+    .p-1 {
+        font-size: 14px;
+        min-width: 50px;
+    }
 
     #principal {
         flex-direction: column;
@@ -202,4 +214,6 @@
         margin-bottom: 50px;
 
     }
+
+
 }
