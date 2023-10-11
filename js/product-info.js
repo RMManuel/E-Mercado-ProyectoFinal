@@ -136,6 +136,7 @@ function agregarAlCarrito(producto) {
         });
     }
     localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
+    window.location='cart.html';
 }
 
 
