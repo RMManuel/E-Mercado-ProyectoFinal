@@ -2,12 +2,12 @@
 <html>
 
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="css/registro.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="css/registro.css" rel="stylesheet">
 
-    <title>Registro de Usuarios</title>
+  <title>Registro de Usuarios</title>
 </head>
 
 <body data-bs-theme="light">
@@ -54,7 +54,7 @@
     <div class="banner">
         <img src="img/banner.jpg" alt="">
         <div class="reg">
-            <h2>Ingrese sus datos</h2>
+            <h2 class="pt-4">Ingrese sus datos</h2>
         </div>
     </div>
 
@@ -66,14 +66,14 @@
                 <div class="datos">
                     <label for="nombre">Nombre:</label><br>
                     <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre " required><br><br>
-                    <span>Como en su C.I</span><br><br>
+                    <span>Como aparece en su C.I.</span><br><br>
                 </div>
 
                 <div class="datos">
                     <label for="apellido">Apellido:</label><br>
                     <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido "
                         required><br><br>
-                    <span>Como en su C.I</span><br><br>
+                    <span>Como aparece en su C.I.</span><br><br>
                 </div>
 
                 <div class="datos">
@@ -97,7 +97,7 @@
                 </div>
 
 
-                <div class="boton"><input style="justify-content:center;" type="submit" value="Registrarse"></div><br>
+                <div class="boton"><input id="btnRegistro" class="btn" style="justify-content:center;" type="submit" value="Registrarse"></div><br>
 
 
             </form>

@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     let producto = await obtenerProductoSeleccionado();
@@ -8,13 +9,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     mostrarImgProducto(producto)
     listarRelatedProducts(relatedProducts);
     listarComentarios(coment);
-
-
 })
 
 const selectedId = localStorage.getItem("productoSeleccionado");
-
-
 
 async function obtenerProductoSeleccionado() {
     const responseId = await getJSONData(PRODUCT_INFO_URL + selectedId + EXT_TYPE);
@@ -35,7 +32,6 @@ function mostrarProductoSeleccionado(producto) {
             <h1>${producto.name}</h1>
             <hr>
         </div>
-          
         <p><span class="bold">Precio</span>:<br>${producto.currency}:${producto.cost}</p>
         <p><span class="bold">Descripción:</span><br>${producto.description}</p>
         <p><span class="bold">Categoría</span>:<br>${producto.category}</p>
