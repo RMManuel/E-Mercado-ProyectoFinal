@@ -1,12 +1,10 @@
 body {
     margin: 0;
-    background-color: #F5F5F5;
 }
 
 .centrador {
     display: flex;
     justify-content: center;
-    
     height: 100vh;
 }
 
@@ -24,10 +22,14 @@ input[type="mail"] {
     text-align: center;
 }
 
+#btnRegistro {
+    border-color: #6e6e6e;
+}
+
 .formulario {
     font-family: Arial, Helvetica, sans-serif;
     width: 90%;
-    max-width: 400px;
+    max-width: 550px;
     margin: 0 auto;
     padding: 5%;
     box-sizing: border-box;

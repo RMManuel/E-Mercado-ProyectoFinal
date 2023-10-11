@@ -31,14 +31,14 @@ function mostrarProductosCart(articulos) {
 
     const encabezado = document.createElement("thead");
     encabezado.innerHTML = `
-         <tr>
-             <th></th>
-             <th>Nombre</th>
-             <th>Costo</th>
-             <th>Cantidad</th>
-             <th>Subtotal</th>
-         </tr>
-     `;
+        <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Costo</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+        </tr>
+    `;
     const cuerpoTabla = document.createElement("tbody");
 
     articulos.forEach(art => {
