@@ -124,6 +124,7 @@ function agregarAlCarrito(producto) {
     if (producto.id == selectedId) {
 
         productosEnCarrito.push({
+            'id': producto.id,
             'name': producto.name,
             'count': 1,
             'unitCost': producto.cost,
