@@ -56,8 +56,10 @@ function mostrarProductosCart(articulos) {
             <td><img src="${img}" alt="${nombre}" width="100"></td>
             <td>${nombre}</td>
             <td>${moneda} <span class="costo"> ${costo} </span </td>
-            <td><input type="number" min=1 onchange="actualizarSub()" class="cantidad" value="${cantidad}"></td>
+            <td><input type="number" min=1 onchange="actualizarSub()" class="cantidad w-25 text-center" value="${cantidad}"></td>
             <td> ${moneda} <span class='subtotal'> ${subtotal} </span> </td>
+            <td> <button> <i class="bi bi-trash3"></i> </button></td>
+
         `;
 
         cuerpoTabla.appendChild(fila);
@@ -81,5 +83,8 @@ function actualizarSub() {
 
         mostrarnuevosubtotal[i].textContent = `${nuevoSubtotal}`
     }
-
 }
+
+
+
+
