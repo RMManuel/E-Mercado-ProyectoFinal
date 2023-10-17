@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     cargarProductosCart();
+    let radiobtns = document.querySelectorAll('input[name=tipoEnvio]');
+    for (const btn of radiobtns) {
+        btn.addEventListener("click", () => {
+            costoEnvio();
+        })
+    }
 });
 
 
@@ -69,6 +75,7 @@ function mostrarProductosCart(articulos) {
     tabla.appendChild(cuerpoTabla);
 
     contenidoCarrito.appendChild(tabla);
+    subtotalGeneral();
 }
 
 function actualizarSub() {
@@ -83,8 +90,43 @@ function actualizarSub() {
 
         mostrarnuevosubtotal[i].textContent = `${nuevoSubtotal}`
     }
+    subtotalGeneral();
+    costoEnvio();
 }
 
+function subtotalGeneral() {
+    let subtotales = document.getElementsByClassName('subtotal');
+    let subtotalGeneralCont = document.getElementById('subtotalGeneral');
+    let subtotalGeneral = 0;
+    for (let value of subtotales) {
+        subtotalGeneral += parseInt(value.innerHTML);
+    }
+    subtotalGeneralCont.innerHTML = `USD ${subtotalGeneral}`;
+    costoTotal();
+}
 
+function costoEnvio() {
+    let botonesRadio = document.querySelectorAll('input[name=tipoEnvio]'); 
+    let subtotalGeneralCont = parseInt((document.getElementById('subtotalGeneral').innerHTML).replace("USD ",""));
+    let subtotalEnvioCont = document.getElementById('subtotalEnvio');
+    let costoEnvio = 0;
+    if (botonesRadio[0].checked) {
+        costoEnvio = (subtotalGeneralCont*15)/100;
+    } else if (botonesRadio[1].checked) {
+        costoEnvio = (subtotalGeneralCont*7)/100;
+    } else if (botonesRadio[2].checked) {
+        costoEnvio = (subtotalGeneralCont*5)/100;
+    } 
+    subtotalEnvioCont.innerHTML = `USD ${costoEnvio}`;
+    costoTotal();
+}
+
+function costoTotal() {
+    let subtotalGeneral = parseInt((document.getElementById('subtotalGeneral').innerHTML).replace("USD ",""));
+    let subtotalEnvio = parseInt((document.getElementById('subtotalEnvio').innerHTML).replace("USD ",""));
+    let costTotalCont = document.getElementById('costoTotal');
+    let costoTotal = subtotalGeneral + subtotalEnvio;
+    costTotalCont.innerHTML = `USD ${costoTotal}`;
+}
 
 
