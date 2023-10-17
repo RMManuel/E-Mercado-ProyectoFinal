@@ -8,32 +8,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+let carrito = [];
 
 async function cargarProductosCart() {
-    let art = await obtenerProductosCart();
-    mostrarProductosCart(art);
+    carrito = await obtenerProductosCart();
+    mostrarProductosCart(carrito);
 }
 
 async function obtenerProductosCart() {
     let respCarrito = await getJSONData(CART_INFO_URL + "25801" + EXT_TYPE);
     let infoCart = respCarrito.data;
-    let articulos = infoCart.articles;
+    let productosAPI = infoCart.articles;
 
     const articulosLocalCart = JSON.parse(localStorage.getItem('productosEnCarrito'));
 
     if (articulosLocalCart) {
-        articulos.push(...articulosLocalCart)
-    }
-    console.log(articulos)
 
-    return articulos;
+        productosAPI = productosAPI.filter(apiProduct => !articulosLocalCart.some(localProduct => localProduct.id === apiProduct.id));
+    }
+
+    carrito = [...productosAPI, ...articulosLocalCart];
+    console.log(carrito);
+
+    return carrito;
 }
 
 function mostrarProductosCart(articulos) {
 
     let contenidoCarrito = document.getElementById('contenidoCarrito')
+
     const tabla = document.createElement("table");
     tabla.classList.add("table", "table-striped", "table-bordered");
+    contenidoCarrito.innerHTML = " ";
 
     const encabezado = document.createElement("thead");
     encabezado.innerHTML = `
@@ -54,6 +60,7 @@ function mostrarProductosCart(articulos) {
         let costo = art.unitCost;
         let moneda = art.currency;
         let img = art.image;
+        let id = art.id
 
 
         let subtotal = costo * cantidad;
@@ -64,7 +71,7 @@ function mostrarProductosCart(articulos) {
             <td>${moneda} <span class="costo"> ${costo} </span </td>
             <td><input type="number" min=1 onchange="actualizarSub()" class="cantidad w-25 text-center" value="${cantidad}"></td>
             <td> ${moneda} <span class='subtotal'> ${subtotal} </span> </td>
-            <td> <button> <i class="bi bi-trash3"></i> </button></td>
+            <td> <button id="item" onclick="eliminarDelCarrito(${id})"> <i class="bi bi-trash3"></i> </button></td>
 
         `;
 
@@ -130,3 +137,10 @@ function costoTotal() {
 }
 
 
+function eliminarDelCarrito(id) {
+
+    carrito = carrito.filter((element) => element.id !== id)
+
+    localStorage.setItem('productosEnCarrito', JSON.stringify(carrito));
+    mostrarProductosCart(carrito)
+}
