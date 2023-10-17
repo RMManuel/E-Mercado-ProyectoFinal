@@ -154,18 +154,17 @@ function ListarDatos(productList) {
         <div onclick="guardarProductos(${prodList.id})" class="list-group-item list-group-item-action cursor-active">
             <div class="row">
                 <div class="col-3">
-                        <img src="${image}" alt="${prodList.image}" class="img-thumbnail">
+                    <img src="${image}" alt="${prodList.image}" class="img-thumbnail">
+                </div>
+                <div class="col">
+                    <div class="d-flex w-100 justify-content-between">
+                        <p class="mb-1">${name} - ${currency} ${price}</p>
+                        <small class="text-muted">${soldCount} vendidos</small>
                     </div>
-                        <div class="col">
-                            <div class="d-flex w-100 justify-content-between">
-                                <p class="mb-1">${name} - ${currency} ${price}</p>
-                                <small class="text-muted">${soldCount} vendidos</small>
-                        </div>
-                        <small class="text-muted">${description} vendidos</small>
-                    </div>
+                    <small class="text-muted">${description}</small>
                 </div>
             </div>
-            </div>`;
+        </div>`;
         container.appendChild(productsList);
     })
 
