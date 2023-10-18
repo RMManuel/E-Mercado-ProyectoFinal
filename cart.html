@@ -119,9 +119,74 @@
           <label for="">Esquina:</label>
           <input type="text" name="esquina" id="">
         </div>
+        <!--Arranca la estructura modal-->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Forma de pago 
+        </button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="formularioPago">
+                          <div class="mb-3">
+                              <input type="radio" name="metodo-pago" value="tarjeta" id="radioTarjeta"> Tarjeta de débito/crédito
+                          </div>
+                          <div class="row mb-3">
+                              <div class="col-md-6 mb-3">
+                                  <label for="dato1" class="form-label">Titular de la tarjeta:</label>
+                                  <input type="text" class="form-control" id="dato1" name="dato1" required disabled>
+                              </div>
+                              <div class="col-md-6 mb-3">
+                                  <label for="dato2" class="form-label">Número de la tarjeta:</label>
+                                  <input type="number" class="form-control" id="dato2" name="dato2" required disabled>
+                              </div>
+                          </div>
+                          <div class="row mb-3">
+                              <div class="col-md-6 mb-3">
+                                  <label for="fecha" class="form-label">Fecha de expiración:</label>
+                                  <input type="date" class="form-control" id="fecha" name="fecha" required disabled>
+                              </div>
+                              <div class="col-md-6 mb-3">
+                                  <label for="dato4" class="form-label">Código de seguridad:</label>
+                                  <input type="number" class="form-control" id="dato4" name="dato4" required disabled>
+                              </div>
+                          </div>
+                          <hr>
+                          <div class="mb-3">
+                              <input type="radio" name="metodo-pago" value="transferencia" id="radioTransferencia"> Transferencia bancaria
+                          </div>
+                          <div class="row mb-3">
+                              <div class="col-md-6 mb-3">
+                                  <label for="nombres" class="form-label">Selecciona un nombre:</label>
+                                  <select class="form-select" id="nombres" name="nombres" required disabled>
+                                      <option value="" disabled selected>Banco</option>
+                                      <option value="nombre1">SANTANDER</option>
+                                      <option value="nombre2">SCOTIABANK</option>
+                                      <option value="nombre4">ITAU</option>
+                                      <option value="nombre5">BBVA</option>
+                                      <option value="nombre6">BROU</option>
+                                      <option value="nombre7">BANDES</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-6 mb-3">
+                                  <label for="bnkacc" class="form-label">Numero de cuenta:</label>
+                                  <input type="number" class="form-control" id="bnkacc" name="bnkacc" required disabled>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn btn-primary" id="botonPagar">Pagar</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
       </div>
-
-    </div>
+      </div> 
+      <!--fin del modal-->
+      </div>
   </main>
 
   <!-- Footer -->
@@ -151,6 +216,8 @@
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/index.js"></script>
+  <script src="js/emaArreglalodepue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>
