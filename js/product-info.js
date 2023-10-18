@@ -121,19 +121,30 @@ async function obtenerComentariosSeleccionado() {
 function agregarAlCarrito(producto) {
     let productosEnCarrito = JSON.parse(localStorage.getItem('productosEnCarrito')) || [];
 
-    if (producto.id == selectedId) {
-
-        productosEnCarrito.push({
-            'id': producto.id,
-            'name': producto.name,
-            'count': 1,
-            'unitCost': producto.cost,
-            'currency': 'USD',
-            'image': producto.images[0]
-        });
+    let itemCarrito = {
+        'id': producto.id,
+        'name': producto.name,
+        'count': 1,
+        'unitCost': producto.cost,
+        'currency': 'USD',
+        'image': producto.images[0]
     }
+
+    let existe = productosEnCarrito.find(item => item.id === producto.id)
+
+    if(existe){
+        console.log("estas en if")
+        existe.count += itemCarrito.count;
+    }
+
+    else  {
+        productosEnCarrito.push(itemCarrito);
+    }
+
     localStorage.setItem('productosEnCarrito', JSON.stringify(productosEnCarrito));
     window.location='cart.html';
+
+    
 }
 
 
