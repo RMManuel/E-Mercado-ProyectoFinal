@@ -2,24 +2,27 @@ document.addEventListener('DOMContentLoaded', function () {
     actualizarCampos();
 });
 
-let radioTarjeta = document.getElementById('radioTarjeta');
-let radioTransferencia = document.getElementById('radioTransferencia');
+const radioTarjeta = document.getElementById('radioTarjeta');
+const radioTransferencia = document.getElementById('radioTransferencia');
+const resultadoPago = document.getElementById('resultadoPago');
+resultadoPago.textContent = 'Seleccione una forma de pago:';
 
 function actualizarCampos() {
-    let camposTarjeta = document.querySelectorAll('#dato1, #dato2, #fecha, #dato4');
-    let camposTransferencia = document.querySelectorAll('#nombres, #bnkacc');
+    const camposTarjeta = document.querySelectorAll('#dato1, #dato2, #fecha, #dato4');
+    const camposTransferencia = document.querySelectorAll('#nombres, #bnkacc');
+    const isTarjetaChecked = radioTarjeta.checked;
 
-    camposTarjeta.forEach(function (campo) {
-        campo.disabled = !radioTarjeta.checked;
-    });
+    camposTarjeta.forEach(campo => campo.disabled = !isTarjetaChecked);
+    camposTransferencia.forEach(campo => campo.disabled = isTarjetaChecked);
 
-    camposTransferencia.forEach(function (campo) {
-        campo.disabled = !radioTransferencia.checked;
-    });
+    if (isTarjetaChecked) {
+        resultadoPago.textContent = 'Has seleccionado Tarjeta de débito/crédito';
+    } else if (radioTransferencia.checked) {
+        resultadoPago.textContent = 'Has seleccionado Transferencia bancaria';
+    }
 }
 
-// Ejecuta la función inicialmente para establecer el estado inicial
-
+actualizarCampos();
 
 if (radioTarjeta && radioTransferencia) {
     radioTarjeta.addEventListener('change', actualizarCampos);
@@ -28,11 +31,14 @@ if (radioTarjeta && radioTransferencia) {
     console.error('Elementos no encontrados con los IDs proporcionados.');
 }
 
-let formularioPago = document.getElementById('formularioPago');
+const formularioPago = document.getElementById('formularioPago');
+
 if (formularioPago) {
     formularioPago.addEventListener('submit', function (event) {
-        //  que este seleccionado una opcio
-        if (!radioTarjeta.checked && !radioTransferencia.checked) {
+        const isTarjetaChecked = radioTarjeta.checked;
+        const isTransferenciaChecked = radioTransferencia.checked;
+
+        if (!isTarjetaChecked && !isTransferenciaChecked) {
             event.preventDefault();
             Swal.fire({
                 icon: 'error',
@@ -42,14 +48,11 @@ if (formularioPago) {
             return;
         }
 
-        let campoCodigo = document.getElementById('dato4');
+        const campoCodigo = document.getElementById('dato4');
 
-        // validacione tarjeta
-        if (radioTarjeta.checked) {
-            let camposTarjeta = document.querySelectorAll('#dato1, #dato2, #fecha, #dato4');
-            let camposVacios = Array.from(camposTarjeta).some(function (campo) {
-                return campo.value.trim() === '';
-            });
+        if (isTarjetaChecked) {
+            const camposTarjeta = document.querySelectorAll('#dato1, #dato2, #fecha, #dato4');
+            const camposVacios = Array.from(camposTarjeta).some(campo => campo.value.trim() === '');
 
             if (camposVacios) {
                 event.preventDefault();
@@ -62,20 +65,31 @@ if (formularioPago) {
             }
         }
 
-        event.preventDefault(); // cancela envio
-        // Simulación de verificación de pago
-        let exitoPago = Math.random() < 0.5; // Simula un 50% de éxito
+        event.preventDefault(); 
+        const exitoPago = Math.random() < 0.5;
 
         if (exitoPago) {
             Swal.fire({
                 icon: 'success',
                 title: '¡Pago exitoso!',
                 text: 'Gracias por tu pago.',
-            });
+            }).then(() => {
+                const modal = document.getElementById('exampleModal');
+                
+                // falta ver por que se pone gris
+            
 
-            // reset forzado
-            formularioPago.reset();
-            actualizarCampos(); // actualiza los campos
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+                
+                
+                if (isTarjetaChecked) {
+                    resultadoPago.textContent = 'Has pagado con Tarjeta de débito/crédito';
+                }
+                else {
+                    resultadoPago.textContent = 'Has pagado con Transferencia bancaria';
+                }
+            });
         } else {
             Swal.fire({
                 icon: 'error',

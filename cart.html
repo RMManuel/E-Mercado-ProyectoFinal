@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 
@@ -56,48 +56,20 @@
   </nav>
 
   <!-- Main -->
-  
+
   <main>
     <div class="container">
       <div class=" text-center mt-5">
         <h2 class="pb-4">Carrito de compras</h2>
       </div>
+
       <div id="contenidoCarrito" class="w-100 table-responsive">
       </div>
 
-    <!-- Costos -->
-
-    <div class="list-group w-50">
-      <h4 class="pt-4 pb-2">Costos</h4>
-      <div class="list-group-item list-group-item-action cursor-active">
-        <div class="row">
-          <div class="col d-flex w-100 justify-content-between">
-            <p class="mb-0">Subtotal <br> <small class="text-muted">Costo unitario del producto por cantidad </small> </p>
-            <p id="subtotalGeneral" class="text-muted">USD 0</p>
-          </div>
-        </div>
-      </div>
-      <div class="list-group-item list-group-item-action cursor-active">
-        <div class="row">
-          <div class="col d-flex w-100 justify-content-between">
-            <p class="mb-0">Costo de envío <br> <small class="text-muted">Según el tipo de envío </small> </p>
-            <p id="subtotalEnvio" class="text-muted">USD 0</p>
-          </div>
-        </div>
-      </div>
-      <div class="list-group-item list-group-item-action cursor-active">
-        <div class="row">
-          <div class="col d-flex w-100 justify-content-between">
-            <p class="mb-0">Total ($)</p>
-            <p id="costoTotal" class="text-muted">USD 0</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
       <!-- Tipo de envio -->
-
-      <div class="w-50">
+<!-- esto es lo que estoy cambiando para agregar un boton que valide -->
+      <form class="w-50">
         <h4 class="pt-4 pb-2">Tipo de envío</h4>
 
         <div>
@@ -111,82 +83,125 @@
         <div>
           <h4 class="pt-4 pb-2">Dirección de envío</h4>
           <label for="">Calle:</label>
-          <input type="text" name="calle" id="">
+          <input type="text" name="calle" id="calle" required>
 
           <label for="">Número:</label>
-          <input type="text" name="numero" id="">
+          <input type="text" name="numero" id="numero" required>
 
           <label for="">Esquina:</label>
-          <input type="text" name="esquina" id="">
+          <input type="text" name="esquina" id="esquina" required>
         </div><br>
-        <!--Arranca la estructura modal-->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Forma de pago 
-        </button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-dialog modal-dialog-scrollable">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                      <form id="formularioPago">
-                          <div class="mb-3">
-                              <input type="radio" name="metodo-pago" value="tarjeta" id="radioTarjeta"> Tarjeta de débito/crédito
-                          </div>
-                          <div class="row mb-3">
-                              <div class="col-md-6 mb-3">
-                                  <label for="dato1" class="form-label">Titular de la tarjeta:</label>
-                                  <input type="text" class="form-control" id="dato1" name="dato1" required disabled>
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                  <label for="dato2" class="form-label">Número de la tarjeta:</label>
-                                  <input type="number" class="form-control" id="dato2" name="dato2" required disabled>
-                              </div>
-                          </div>
-                          <div class="row mb-3">
-                              <div class="col-md-6 mb-3">
-                                  <label for="fecha" class="form-label">Fecha de expiración:</label>
-                                  <input type="date" class="form-control" id="fecha" name="fecha" required disabled>
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                  <label for="dato4" class="form-label">Código de seguridad:</label>
-                                  <input type="number" class="form-control" id="dato4" name="dato4" required disabled>
-                              </div>
-                          </div>
-                          <hr>
-                          <div class="mb-3">
-                              <input type="radio" name="metodo-pago" value="transferencia" id="radioTransferencia"> Transferencia bancaria
-                          </div>
-                          <div class="row mb-3">
-                              <div class="col-md-6 mb-3">
-                                  <label for="nombres" class="form-label">Selecciona un nombre:</label>
-                                  <select class="form-select" id="nombres" name="nombres" required disabled>
-                                      <option value="" disabled selected>Banco</option>
-                                      <option value="nombre1">SANTANDER</option>
-                                      <option value="nombre2">SCOTIABANK</option>
-                                      <option value="nombre4">ITAU</option>
-                                      <option value="nombre5">BBVA</option>
-                                      <option value="nombre6">BROU</option>
-                                      <option value="nombre7">BANDES</option>
-                                  </select>
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                  <label for="bnkacc" class="form-label">Numero de cuenta:</label>
-                                  <input type="number" class="form-control" id="bnkacc" name="bnkacc" required disabled>
-                              </div>
-                          </div>
-                          <button type="submit" class="btn btn-primary" id="botonPagar">Pagar</button>
-                      </form>
-                  </div>
+        <div class="list-group w-100">
+          <h4 class="pt-4 pb-2">Costos</h4>
+          <div class="list-group-item list-group-item-action cursor-active">
+            <div class="row">
+              <div class="col d-flex w-100 justify-content-between">
+                <p class="mb-0">Subtotal <br> <small class="text-muted">Costo unitario del producto por cantidad
+                  </small> </p>
+                <p id="subtotalGeneral" class="text-muted">USD 0</p>
               </div>
+            </div>
           </div>
+          <div class="list-group-item list-group-item-action cursor-active">
+            <div class="row">
+              <div class="col d-flex w-100 justify-content-between">
+                <p class="mb-0">Costo de envío <br> <small class="text-muted">Según el tipo de envío </small> </p>
+                <p id="subtotalEnvio" class="text-muted">USD 0</p>
+              </div>
+            </div>
+          </div>
+          <div class="list-group-item list-group-item-action cursor-active">
+            <div class="row">
+              <div class="col d-flex w-100 justify-content-between">
+                <p class="mb-0">Total ($)</p>
+                <p id="costoTotal" class="text-muted">USD 0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Arranca la estructura modal-->
+
+        <div class="container border p-3 mt-3">
+          <h5>Forma de pago</h5>
+          <span id="resultadoPago">Seleccione una forma de pago:</span>
+          <button type="button" class="btn btn-primary w-25" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Seleccionar
+          </button>
       </div>
-      </div> 
+      
+      
+    
+      
+        <button class="mt-4" type="submit" id="finalizarCompra">Finalizar compra</button>
+      </form>
+
+
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Forma de pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="formularioPago">
+                  <div class="mb-3">
+                    <input type="radio" name="metodo-pago" value="tarjeta" id="radioTarjeta"> Tarjeta de débito/crédito
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                      <label for="dato1" class="form-label">Titular de la tarjeta:</label>
+                      <input type="text" class="form-control" id="dato1" name="dato1" required disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="dato2" class="form-label">Número de la tarjeta:</label>
+                      <input type="number" class="form-control" id="dato2" name="dato2" required disabled>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                      <label for="fecha" class="form-label">Fecha de expiración:</label>
+                      <input type="date" class="form-control" id="fecha" name="fecha" required disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="dato4" class="form-label">Código de seguridad:</label>
+                      <input type="number" class="form-control" id="dato4" name="dato4" required disabled>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="mb-3">
+                    <input type="radio" name="metodo-pago" value="transferencia" id="radioTransferencia"> Transferencia
+                    bancaria
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6 mb-3">
+                      <label for="nombres" class="form-label">Selecciona un nombre:</label>
+                      <select class="form-select" id="nombres" name="nombres" required disabled>
+                        <option value="" disabled selected>Banco</option>
+                        <option value="nombre1">SANTANDER</option>
+                        <option value="nombre2">SCOTIABANK</option>
+                        <option value="nombre4">ITAU</option>
+                        <option value="nombre5">BBVA</option>
+                        <option value="nombre6">BROU</option>
+                        <option value="nombre7">BANDES</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="bnkacc" class="form-label">Numero de cuenta:</label>
+                      <input type="number" class="form-control" id="bnkacc" name="bnkacc" required disabled>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" id="botonPagar">Aceptar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!--fin del modal-->
-      </div>
+    </div>
   </main>
 
   <!-- Footer -->
@@ -220,7 +235,5 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
+
 </html>
-
-
-
