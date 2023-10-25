@@ -235,11 +235,6 @@ button:hover {
   border-radius: 3px;
 }
 
-#item {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
 input[type='number'] {
   min-width: 60px;
 }
