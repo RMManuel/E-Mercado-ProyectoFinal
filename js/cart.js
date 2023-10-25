@@ -71,7 +71,7 @@ function mostrarProductosCart(articulos) {
             <td>${moneda} <span class="costo"> ${costo} </span </td>
             <td><input type="number" min=1 onchange="actualizarSub()" class="cantidad w-25 text-center" value="${cantidad}"></td>
             <td> ${moneda} <span class='subtotal'> ${subtotal} </span> </td>
-            <td class="text-center"> <button id="item" class="btn btn-danger w-25" onclick="eliminarDelCarrito(${id})"> <i class="bi bi-trash3"></i> </button></td>
+            <td class="text-center"> <button id="item" class="btn btn-danger w-75" style="min-width: 50px" onclick="eliminarDelCarrito(${id})"> <i class="bi bi-trash3"></i> </button></td>
 
         `;
 

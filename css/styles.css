@@ -220,7 +220,6 @@ button {
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  min-width: 120px;
 }
 
 button:hover {
