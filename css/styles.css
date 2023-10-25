@@ -233,3 +233,8 @@ button:hover {
 #filtrarPrecio, #filtrarLimpiar {
   border-radius: 3px;
 }
+
+#item {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
