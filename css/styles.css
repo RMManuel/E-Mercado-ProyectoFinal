@@ -220,6 +220,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+  min-width: 120px;
 }
 
 button:hover {
@@ -237,4 +238,8 @@ button:hover {
 #item {
   background-color: #dc3545;
   border-color: #dc3545;
+}
+
+input[type='number'] {
+  min-width: 60px;
 }
