@@ -111,6 +111,7 @@ function subtotalGeneral() {
     }
     subtotalGeneralCont.innerHTML = `USD ${subtotalGeneral}`;
     costoTotal();
+    costoEnvio();
 }
 
 function costoEnvio() {
