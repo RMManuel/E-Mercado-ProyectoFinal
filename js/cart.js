@@ -163,13 +163,11 @@ function validarFinalizarCompra(e) {
   } else if (!calle.value || !esquina.value || !numero.value) {
     Swal.fire("Error", "Por favor, complete dirección del envío", "error");
 
-  } else if (resultadoPago.textContent !== "Has seleccionado Tarjeta de débito/crédito" && resultadoPago.textContent !== "Has pagado con Transferencia bancaria") {
+  } else if (resultadoPago.textContent !== "Has pagado con Tarjeta de débito/crédito" && resultadoPago.textContent !== "Has pagado con Transferencia bancaria") {
     Swal.fire("Error", "Debe seleccionar una forma de pago", "error");
   } else {
     // En este punto, todos los elementos del formulario están completos y el método de pago es válido.
-    Swal.fire("Éxito", "Has comprado con éxito", "success").then(() => {
-      // Aquí puedes agregar código para enviar el formulario si es necesario.
-    });
+    Swal.fire("Éxito", "Has comprado con éxito", "success")
   }
 }
 
