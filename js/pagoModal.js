@@ -10,7 +10,7 @@ resultadoPago.textContent = 'Seleccione una forma de pago:';
 function actualizarCampos() {
     const camposTarjeta = document.querySelectorAll('#dato1, #dato2, #fecha, #dato4');
     const camposTransferencia = document.querySelectorAll('#nombres, #bnkacc');
-    const isTarjetaChecked = radioTarjeta.checked;
+    let isTarjetaChecked = radioTarjeta.checked;
 
     camposTarjeta.forEach(campo => campo.disabled = !isTarjetaChecked);
     camposTransferencia.forEach(campo => campo.disabled = isTarjetaChecked);
