@@ -29,7 +29,6 @@ async function obtenerProductosCart() {
     }
 
     carrito = [...productosAPI, ...articulosLocalCart];
-    console.log(carrito);
 
     return carrito;
 }
@@ -84,6 +83,7 @@ function mostrarProductosCart(articulos) {
 
     contenidoCarrito.appendChild(tabla);
     subtotalGeneral();
+    hayArticulos();
 }
 
 function actualizarSub() {
@@ -130,8 +130,8 @@ function costoEnvio() {
 }
 
 function costoTotal() {
-    let subtotalGeneral = parseInt((document.getElementById('subtotalGeneral').innerHTML).replace("USD ",""));
-    let subtotalEnvio = parseInt((document.getElementById('subtotalEnvio').innerHTML).replace("USD ",""));
+    let subtotalGeneral = parseFloat((document.getElementById('subtotalGeneral').innerHTML).replace("USD ",""));
+    let subtotalEnvio = parseFloat((document.getElementById('subtotalEnvio').innerHTML).replace("USD ",""));
     let costTotalCont = document.getElementById('costoTotal');
     let costoTotal = subtotalGeneral + subtotalEnvio;
     costTotalCont.innerHTML = `USD ${costoTotal}`;
@@ -143,9 +143,8 @@ function eliminarDelCarrito(id) {
     carrito = carrito.filter((element) => element.id !== id)
 
     localStorage.setItem('productosEnCarrito', JSON.stringify(carrito));
-    mostrarProductosCart(carrito)
+    mostrarProductosCart(carrito);
     hayArticulos();
-    console.log(carrito)
 }
 
 
@@ -153,34 +152,34 @@ let validar = document.getElementById('finalizarCompra');
 validar.addEventListener('click', validarFinalizarCompra);
 
 function validarFinalizarCompra(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const tipoEnvio = document.querySelector('input[name="tipoEnvio"]:checked');
-  const calle = document.getElementById('calle');
-  const numero = document.getElementById('numero');
-  const esquina = document.getElementById('esquina');
-  const resultadoPago = document.getElementById('resultadoPago');
+    const tipoEnvio = document.querySelector('input[name="tipoEnvio"]:checked');
+    const calle = document.getElementById('calle');
+    const numero = document.getElementById('numero');
+    const esquina = document.getElementById('esquina');
+    const resultadoPago = document.getElementById('resultadoPago');
 
-  if (!tipoEnvio) {
-    Swal.fire("Error", "Por favor, seleccione un tipo de envío", "error");
-  } else if (!calle.value || !esquina.value || !numero.value) {
-    Swal.fire("Error", "Por favor, complete dirección del envío", "error");
+    if (!tipoEnvio) {
+        Swal.fire("Error", "Por favor, seleccione un tipo de envío", "error");
+    } else if (!calle.value || !esquina.value || !numero.value) {
+        Swal.fire("Error", "Por favor, complete dirección del envío", "error");
 
-  } else if (resultadoPago.textContent !== "Has pagado con Tarjeta de débito/crédito" && resultadoPago.textContent !== "Has pagado con Transferencia bancaria") {
-    Swal.fire("Error", "Debe seleccionar una forma de pago", "error");
-  } else {
-    // En este punto, todos los elementos del formulario están completos y el método de pago es válido.
-    Swal.fire("Éxito", "Has comprado con éxito", "success")
-  }
+    } else if (resultadoPago.textContent !== "Has pagado con Tarjeta de débito/crédito" && resultadoPago.textContent !== "Has pagado con Transferencia bancaria") {
+        Swal.fire("Error", "Debe seleccionar una forma de pago", "error");
+    } else {
+        // En este punto, todos los elementos del formulario están completos y el método de pago es válido.
+        Swal.fire("Éxito", "Has comprado con éxito", "success")
+    }
 }
 
 function hayArticulos(){
-    const btn=document.getElementById('finalizarCompra')
-    if(carrito.length>0){
-        btn.setAttribute('enabled');
+    const btn=document.getElementById('finalizarCompra');
+    if(carrito.length > 0){
+        validar.removeAttribute("disabled");
     }
     else {
-        btn.setAttribute('disabled');
+        validar.setAttribute("disabled", "true");
     }
 }
 
