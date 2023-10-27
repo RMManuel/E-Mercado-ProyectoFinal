@@ -65,37 +65,29 @@ if (formularioPago) {
             }
         }
 
-        event.preventDefault(); 
-        const exitoPago = Math.random() < 0.5;
+        event.preventDefault();
+        const exitoPago = Math.random() < 1;
 
         if (exitoPago) {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Pago exitoso!',
-                text: 'Gracias por tu pago.',
-            }).then(() => {
-                const modal = document.getElementById('exampleModal');
-                
-                // falta ver por que se pone gris
-            
 
-                modal.classList.remove('show');
-                modal.setAttribute('aria-hidden', 'true');
-                
-                
-                if (isTarjetaChecked) {
-                    resultadoPago.textContent = 'Has pagado con Tarjeta de débito/crédito';
-                }
-                else {
-                    resultadoPago.textContent = 'Has pagado con Transferencia bancaria';
-                }
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Pago fallido',
-                text: 'Hubo un problema con tu pago. Inténtalo de nuevo.',
-            });
+
+            const modal = document.getElementById('exampleModal');
+            const exampleModal = document.getElementById('exampleModal')
+
+
+         
+
+            modal.classList.remove('show');
+            modal.setAttribute('aria-hidden', 'true');
+
+
+            if (isTarjetaChecked) {
+                resultadoPago.textContent = 'Has pagado con Tarjeta de débito/crédito';
+            }
+            else {
+                resultadoPago.textContent = 'Has pagado con Transferencia bancaria';
+            }
+
         }
     });
 } else {

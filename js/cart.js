@@ -149,6 +149,7 @@ function eliminarDelCarrito(id) {
 }
 
 
+
 let validar = document.getElementById('finalizarCompra');
 validar.addEventListener('click', validarFinalizarCompra);
 
