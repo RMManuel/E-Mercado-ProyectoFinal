@@ -65,31 +65,46 @@ if (formularioPago) {
             }
         }
 
+
         event.preventDefault();
-        const exitoPago = Math.random() < 1;
+
+        // Esta linea de codigo la hicimos para simular que los datos de la tarjeta esten mal
+        const exitoPago = Math.random() < 0.7;
 
         if (exitoPago) {
-
-
-            const modal = document.getElementById('exampleModal');
-            const exampleModal = document.getElementById('exampleModal')
-
-
-         
-
-            modal.classList.remove('show');
-            modal.setAttribute('aria-hidden', 'true');
-
+            const modalElement = document.getElementById('exampleModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
 
             if (isTarjetaChecked) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pago con tarjeta'
+                })
                 resultadoPago.textContent = 'Has pagado con Tarjeta de débito/crédito';
-            }
-            else {
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pago por transferencia'
+                })
                 resultadoPago.textContent = 'Has pagado con Transferencia bancaria';
             }
 
+            if (modal) {
+                modal.hide();
+            }
         }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error con el metodo de pago',
+                text: 'Hubo un error, por favor vuelva a intentarlo nuevamente.',
+            });
+        }
+
+
     });
 } else {
     console.error('Elemento de formulario no encontrado con el ID proporcionado.');
 }
+
+
