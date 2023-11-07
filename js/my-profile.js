@@ -1,7 +1,7 @@
 let btnsave = document.getElementById("save");
-let email = document.getElementById("email").value; 
+let email = document.getElementById("email");
 let username = localStorage.getItem('username');
-email = JSON.parse(localStorage.getItem(username)).mail;
+email.value = JSON.parse(localStorage.getItem(username)).mail;
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log(email);
