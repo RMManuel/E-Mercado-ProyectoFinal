@@ -3,9 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     registroForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        console.log('asdwasdw');
         let nombre = document.getElementById('nombre').value;
         let contrasena = document.getElementById('contrasena').value;
+        let mail = document.getElementById('mail').value;
 
         //Chequea que el usuario no este registrado aun
         if (localStorage.getItem(nombre) !== null) {
@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // Guardar los datos en el almacenamiento local
         let usuario = {
             nombre: nombre,
-            contrasena: contrasena
+            contrasena: contrasena,
+            mail: mail
         };
         localStorage.setItem(nombre, JSON.stringify(usuario));
 

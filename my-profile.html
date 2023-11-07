@@ -75,45 +75,45 @@
   <main>
     <div class="d-flex mt-2 mx-auto col-lg-6 col-md-6">
       <h1 class="m-4 flex-grow-1">Perfil</h1>
-      <img src="img/img_perfil.png" class="img-thumbnail align-self-start" style="max-width: 150px;">
+      <div class="pt-4"><img src="img/img_perfil.png" class="img-thumbnail align-self-start" style="max-width: 150px;"></div>
     </div>
     <div class="mx-auto col-lg-6 col-md-6"><hr class="mb-4"></div>
     
     <div class="row mx-auto col-lg-6 col-md-6">
       
       <div class="col-lg-6 col-sm-12 mt-2">
-        <span>Primer Nombre*</span>
+        <span>Primer nombre*</span>
+        <input type="text" class="form-control" id="name">
+      </div>
+      <div class="col-lg-6 col-sm-12 mt-2">
+        <span>Segundo nombre</span>
         <input type="text" class="form-control">
       </div>
       <div class="col-lg-6 col-sm-12 mt-2">
-        <span>Segundo Nombre</span>
+        <span>Primer apellido*</span>
+        <input type="text" class="form-control" id="lastname">
+      </div>
+      <div class="col-lg-6 col-sm-12 mt-2">
+        <span>Segundo apellido</span>
         <input type="text" class="form-control">
       </div>
       <div class="col-lg-6 col-sm-12 mt-2">
-        <span>Primer Apellido*</span>
-        <input type="text" class="form-control">
+        <span>E-Mail*</span>
+        <input type="email" class="form-control" id="email" name="email">
       </div>
       <div class="col-lg-6 col-sm-12 mt-2">
-        <span>Segundo Apellido</span>
-        <input type="text" class="form-control">
-      </div>
-      <div class="col-lg-6 col-sm-12 mt-2">
-        <span>E-Mail</span>
-        <input type="email" class="form-control">
-      </div>
-      <div class="col-lg-6 col-sm-12 mt-2">
-        <span>Imagen de Perfil</span>
+        <span>Imagen de perfil</span>
         <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
       </div>
       <div class="col-lg-6 col-sm-12 mt-2">
-        <span>Teléfono de Contacto</span>
+        <span>Teléfono de contacto</span>
         <input type="email" class="form-control">
       </div>
     </div>
 
     <div class="mx-auto col-lg-6 col-md-6"><hr class="mb-4"></div>
 
-    <div class="mx-auto col-lg-6 col-md-6"><button type="button" class="btn btn-primary mt-1">Primary</button></div>
+    <div class="mx-auto col-lg-6 col-md-6 ps-3" style="min-width: 400px"><button type="button" class="btn btn-danger mt-1 w-25" id="save">Guardar cambios</button></div>
 
   </main>
 
@@ -136,6 +136,7 @@
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
   <script src="js/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
