@@ -28,6 +28,7 @@ let secondName = document.getElementById("secondName")
 let lastName2 = document.getElementById("lastname2")
 let contacto = document.getElementById("contacto")
 let imgPerfil = document.getElementById('imgPerfil')
+let nuevaFoto = document.getElementById('inputGroupFile04')
 
 
 function cargarDatosUser() {
@@ -42,6 +43,7 @@ function cargarDatosUser() {
             secondName.value = user.secondName;
             lastName2.value = user.lastName2;
             contacto.value = user.contacto;
+            imgPerfil.src = URL.createObjectURL(user.nuevaFoto)
         }
     }
 }
@@ -71,7 +73,9 @@ function validar() {
             email: email.value,
             secondName: secondName.value,
             lastName2: lastName2.value,
-            contacto: contacto.value
+            contacto: contacto.value,
+            nuevaFoto: nuevaFoto.value
+
         }
         // NO SE QUE CLAVE PONER ACA PARA VALIDAR
         localStorage.setItem(email.value, JSON.stringify(datosUsuario))
