@@ -1,3 +1,18 @@
+
+document.addEventListener("DOMContentLoaded", () => {
+    cargarDatosUser();
+
+    btnsave.addEventListener("click", () => {
+
+
+        validar();
+    });
+
+
+});
+
+
+
 let btnsave = document.getElementById("save");
 let email = document.getElementById("email");
 let username = localStorage.getItem('username');
@@ -5,34 +20,36 @@ let username = localStorage.getItem('username');
 email.value = JSON.parse(localStorage.getItem(username)).mail;
 
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    btnsave.addEventListener("click", () => {
-        // cargarDatosUser()
-        validar();
-    });
-
-   
-
-});
+let nombre = document.getElementById("name")
+let lastname = document.getElementById("lastname")
+// let email = document.getElementById("email").value;
+let secondName = document.getElementById("secondName")
+let lastName2 = document.getElementById("lastname2")
+let contacto = document.getElementById("contacto")
+let imgPerfil = document.getElementById('imgPerfil')
 
 
-// function cargarDatosUser() {
-   
-// //hay que agregar un condicional pa que si el email esta registrado, me llene los imputs con lo que sea, y sino que no llene nada
-// }
+function cargarDatosUser() {
+
+
+    for (const prop in localStorage) {
+        if (prop == email.value) {
+            let user = JSON.parse(localStorage.getItem(prop))
+
+            nombre.value = user.name;
+            lastname.value = user.lastname;
+            secondName.value = user.secondName;
+            lastName2.value = user.lastName2;
+            contacto.value = user.contacto;
+        }
+    }
+}
 
 
 function validar() {
-    let name = document.getElementById("name").value;
-    let lastname = document.getElementById("lastname").value;
-    let email = document.getElementById("email").value;
-    let secondName = document.getElementById("secondName").value;
-    let lastName2 = document.getElementById("lastname2").value;
 
-    
-
-    if ((name == "") || (lastname == "") || (email == "")) {
+    if ((nombre.value == "") || (lastname.value == "") || (email.value == "")) {
         Swal.fire({
             position: "top",
             icon: "error",
@@ -49,16 +66,16 @@ function validar() {
         });
 
         let datosUsuario = {
-            name: name,
-            lastname: lastname,
-            email: email,
-            secondName: secondName,
-            lastName2: lastName2
-
+            name: nombre.value,
+            lastname: lastname.value,
+            email: email.value,
+            secondName: secondName.value,
+            lastName2: lastName2.value,
+            contacto: contacto.value
         }
         // NO SE QUE CLAVE PONER ACA PARA VALIDAR
-        localStorage.setItem("no se que poner acaa", JSON.stringify(datosUsuario))
-       
+        localStorage.setItem(email.value, JSON.stringify(datosUsuario))
+
     }
 
 
