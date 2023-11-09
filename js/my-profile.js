@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         validar();
     });
     
-
 });
 
 
@@ -65,7 +64,7 @@ function validar() {
             icon: "success",
             title: "",
             text: "Se guardaron los cambios"
-        });
+        })
 
         let datosUsuario = {
             name: nombre.value,
@@ -98,10 +97,16 @@ function validar() {
 
                
                 localStorage.setItem(email.value, JSON.stringify(datosUsuario));
+
+                cargarDatosUser();
             });
         } else {
             
             localStorage.setItem(email.value, JSON.stringify(datosUsuario));
+            cargarDatosUser();
+            
         }
+        
     }
+    
 }
