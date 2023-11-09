@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
   const isLoggedIn = localStorage.getItem('isLoggedIn');
-  const username = localStorage.getItem('username');
-  const usernameElement = document.getElementById('username');
+  const usermail = localStorage.getItem('usermail');
+  const usermailElement = document.getElementById('usermail');
   const logoutButton = document.getElementById('logoutButton');
 
-  if (isLoggedIn === 'true' && username) {
-    // El usuario está logeado, mostramos su nombre de usuario en la barra de navegación
-    usernameElement.textContent = username;
+  if (isLoggedIn === 'true' && usermail) {
+    // El usuario está logeado, mostramos su email en la barra de navegación
+    usermailElement.textContent = usermail;
     logoutButton.style.display = 'block'; // Mostrar el botón de cerrar sesión
   } else {
     // El usuario no está logeado, redireccionar a la página de login y ocultar el botón de cerrar sesión.
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Agregar un evento al botón de cerrar sesión para eliminar la información de inicio de sesión y redireccionar a la página de login.
   logoutButton.addEventListener('click', function () {
     localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('username');
+    localStorage.removeItem('usermail');
     window.location.href = "login.html";
   });
 

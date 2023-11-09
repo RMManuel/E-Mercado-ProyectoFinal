@@ -95,12 +95,20 @@ async function obtenerComentariosSeleccionado() {
         let opinion = document.getElementById("txtareaOpinion").value;
         let puntuación = document.getElementById("selectionPuntaje").value;
         let fecha = new Date().toLocaleDateString('en-US');
+        let usermail = localStorage.getItem('usermail');
+        let user = '';
+
+        if (JSON.parse(localStorage.getItem(usermail)).name != '') {
+            user = JSON.parse(localStorage.getItem(usermail)).name;
+        } else {
+            user = usermail;
+        }
 
         let comentarioNuevo = {
             product: localStorage.getItem('productoSeleccionado'),
             score: puntuación,
             description: opinion,
-            user: localStorage.getItem('username'),
+            user: user,
             dateTime: fecha
         };
 
