@@ -2,31 +2,32 @@
 document.addEventListener("DOMContentLoaded", () => {
     cargarDatosUser();
 
+    //Permite que solo se puedan escribir números en el teléfono
+    contacto.addEventListener("input", () => {
+        contacto.value = contacto.value.replace(/[^0-9]/g, '');
+    });
+
     btnsave.addEventListener("click", () => {
         validar();
     });
+
     
 });
 
-
-
 let btnsave = document.getElementById("save");
 let email = document.getElementById("email");
-let username = localStorage.getItem('username');
+//Trae el email automaticamente
+email.value = localStorage.getItem('usermail'); 
 
-email.value = JSON.parse(localStorage.getItem(username)).mail;
+let nombre = document.getElementById("name");
+let lastname = document.getElementById("lastname");
+let secondName = document.getElementById("secondName");
+let lastName2 = document.getElementById("lastname2");
+let contacto = document.getElementById("contacto");
+let imgPerfil = document.getElementById('imgPerfil');
+let nuevaFoto = document.getElementById('inputGroupFile04');
 
-
-
-let nombre = document.getElementById("name")
-let lastname = document.getElementById("lastname")
-let secondName = document.getElementById("secondName")
-let lastName2 = document.getElementById("lastname2")
-let contacto = document.getElementById("contacto")
-let imgPerfil = document.getElementById('imgPerfil')
-let nuevaFoto = document.getElementById('inputGroupFile04')
-
-
+//Trae los datos del perfil automaticamente
 function cargarDatosUser() {
     for (const prop in localStorage) {
         if (prop == email.value) {
@@ -38,19 +39,17 @@ function cargarDatosUser() {
             lastName2.value = user.lastName2;
             contacto.value = user.contacto;
 
-            if (user.nuevaFoto) {
-               
+            if (user.nuevaFoto != '') {
                 imgPerfil.src = user.nuevaFoto;
             } else {
-               
                 imgPerfil.src = 'img/img_perfil.png';
             }
         }
     }
 }
 
-
 function validar() {
+
     if ((nombre.value === "") || (lastname.value === "") || (email.value === "")) {
         Swal.fire({
             position: "top",
@@ -66,47 +65,31 @@ function validar() {
             text: "Se guardaron los cambios"
         })
 
-        let datosUsuario = {
-            name: nombre.value,
-            lastname: lastname.value,
-            email: email.value,
-            secondName: secondName.value,
-            lastName2: lastName2.value,
-            contacto: contacto.value
-        };
+        //Traemos el perfil desde el localStorage y lo modificamos 
+        let datosUsuario = JSON.parse(localStorage.getItem(email.value));
+        datosUsuario.name = nombre.value;
+        datosUsuario.lastname = lastname.value;
+        datosUsuario.secondName = secondName.value;
+        datosUsuario.lastName2 = lastName2.value;
+        datosUsuario.contacto = contacto.value;
 
-        
-        const usuarioExistente = localStorage.getItem(email.value);
-        if (usuarioExistente) {
-            const usuarioParseado = JSON.parse(usuarioExistente);
-            if (usuarioParseado.nuevaFoto) {
-                datosUsuario.nuevaFoto = usuarioParseado.nuevaFoto;
-            }
-        }
-
+        //Lee si se agregó una foto nueva y la guarda en localStorage
         if (nuevaFoto.files.length > 0) {
             const fr = new FileReader();
 
             fr.readAsDataURL(nuevaFoto.files[0]);
 
             fr.addEventListener('load', () => {
+
                 const url = fr.result;
-                console.log(url);
-
                 datosUsuario.nuevaFoto = url;
-
-               
                 localStorage.setItem(email.value, JSON.stringify(datosUsuario));
-
                 cargarDatosUser();
+
             });
         } else {
-            
             localStorage.setItem(email.value, JSON.stringify(datosUsuario));
-            cargarDatosUser();
-            
+            cargarDatosUser();           
         }
-        
     }
-    
 }

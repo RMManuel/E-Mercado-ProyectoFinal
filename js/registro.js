@@ -3,25 +3,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
     registroForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        let nombre = document.getElementById('nombre').value;
         let contrasena = document.getElementById('contrasena').value;
         let mail = document.getElementById('mail').value;
 
         //Chequea que el usuario no este registrado aun
-        if (localStorage.getItem(nombre) !== null) {
-            alert('¡El usuario ' + nombre + ' ya está registrado!');
+        if (localStorage.getItem(mail) !== null) {
+            alert('¡El usuario ya está registrado!');
             window.location.href = "login.html"
             return; // Detener el proceso de registro
         }
         // Guardar los datos en el almacenamiento local
         let usuario = {
-            nombre: nombre,
             contrasena: contrasena,
-            mail: mail
-        };
-        localStorage.setItem(nombre, JSON.stringify(usuario));
+            email: mail,
+            name: '',
+            lastname: '',
+            secondName: '',
+            lastName2: '',
+            contacto: '',
+            nuevaFoto: ''
+        };
+        localStorage.setItem(mail, JSON.stringify(usuario));
 
-        alert('¡Registro exitoso para ' + nombre + '!');
+        alert('¡Registro exitoso!');
         document.getElementById('registroForm').reset();
 
         console.log('Redireccionando a login.html');
