@@ -21,17 +21,15 @@ async function obtenerProductosCart() {
     let infoCart = respCarrito.data;
     let productosAPI = infoCart.articles;
 
-    const articulosLocalCart = JSON.parse(localStorage.getItem('productosEnCarrito'));
+    const articulosLocalCart = JSON.parse(localStorage.getItem('productosEnCarrito')) ?? [];
 
-    if (articulosLocalCart) {
-
-        productosAPI = productosAPI.filter(apiProduct => !articulosLocalCart.some(localProduct => localProduct.id === apiProduct.id));
-    }
+    productosAPI = productosAPI.filter(apiProduct => !articulosLocalCart.some(localProduct => localProduct.id === apiProduct.id));
 
     carrito = [...productosAPI, ...articulosLocalCart];
 
     return carrito;
 }
+
 
 function mostrarProductosCart(articulos) {
 
@@ -115,24 +113,24 @@ function subtotalGeneral() {
 }
 
 function costoEnvio() {
-    let botonesRadio = document.querySelectorAll('input[name=tipoEnvio]'); 
-    let subtotalGeneralCont = parseInt((document.getElementById('subtotalGeneral').innerHTML).replace("USD ",""));
+    let botonesRadio = document.querySelectorAll('input[name=tipoEnvio]');
+    let subtotalGeneralCont = parseInt((document.getElementById('subtotalGeneral').innerHTML).replace("USD ", ""));
     let subtotalEnvioCont = document.getElementById('subtotalEnvio');
     let costoEnvio = 0;
     if (botonesRadio[0].checked) {
-        costoEnvio = (subtotalGeneralCont*15)/100;
+        costoEnvio = (subtotalGeneralCont * 15) / 100;
     } else if (botonesRadio[1].checked) {
-        costoEnvio = (subtotalGeneralCont*7)/100;
+        costoEnvio = (subtotalGeneralCont * 7) / 100;
     } else if (botonesRadio[2].checked) {
-        costoEnvio = (subtotalGeneralCont*5)/100;
-    } 
+        costoEnvio = (subtotalGeneralCont * 5) / 100;
+    }
     subtotalEnvioCont.innerHTML = `USD ${costoEnvio}`;
     costoTotal();
 }
 
 function costoTotal() {
-    let subtotalGeneral = parseFloat((document.getElementById('subtotalGeneral').innerHTML).replace("USD ",""));
-    let subtotalEnvio = parseFloat((document.getElementById('subtotalEnvio').innerHTML).replace("USD ",""));
+    let subtotalGeneral = parseFloat((document.getElementById('subtotalGeneral').innerHTML).replace("USD ", ""));
+    let subtotalEnvio = parseFloat((document.getElementById('subtotalEnvio').innerHTML).replace("USD ", ""));
     let costTotalCont = document.getElementById('costoTotal');
     let costoTotal = subtotalGeneral + subtotalEnvio;
     costTotalCont.innerHTML = `USD ${costoTotal}`;
@@ -170,14 +168,17 @@ function validarFinalizarCompra(e) {
     } else if (resultadoPago.textContent !== "Has pagado con Tarjeta de débito/crédito" && resultadoPago.textContent !== "Has pagado con Transferencia bancaria") {
         Swal.fire("Error", "Debe seleccionar una forma de pago", "error");
     } else {
-        // En este punto, todos los elementos del formulario están completos y el método de pago es válido.
+
         Swal.fire("Éxito", "Has comprado con éxito", "success")
+        guardarCompra()
     }
+
 }
 
-function hayArticulos(){
-    const btn=document.getElementById('finalizarCompra');
-    if(carrito.length > 0){
+function hayArticulos() {
+
+    const btn = document.getElementById('finalizarCompra');
+    if (carrito.length > 0) {
         validar.removeAttribute("disabled");
     }
     else {
@@ -186,3 +187,34 @@ function hayArticulos(){
 }
 
 
+// hacer el post a /cart una vez se haya comprado
+
+function guardarCompra() {
+    let cosasenelcart = carrito;
+    const token = localStorage.getItem('token');
+
+    console.log('Enviando datos al servidor:', cosasenelcart);
+
+    fetch('http://localhost:3000/cart', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cosasenelcart }),
+        mode: 'cors',
+    })
+    .then(response => {
+        if (!response.ok) {
+            Swal.fire("Error", "Debe estar autenticado", "error");
+            throw new Error(`Error en la respuesta del servidor: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Respuesta del servidor:', data);
+    })
+    .catch(error => {
+        console.error('Error al enviar datos al servidor:', error);
+    });
+}

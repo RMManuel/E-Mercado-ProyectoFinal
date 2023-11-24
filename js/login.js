@@ -1,27 +1,39 @@
+
 document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.getElementById('loginForm');
 
-    loginForm.addEventListener('submit', function(e) {
+    loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
         const usermail = document.getElementById('usermail').value;
         const password = document.getElementById('password').value;
 
-        const userData = localStorage.getItem(usermail);
+        try {
+            const response = await fetch("http://localhost:3000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username: usermail, password: password })
+            });
 
-        if (userData) {
-            const usuario = JSON.parse(userData);
-            if (password === usuario.contrasena) {
-                localStorage.setItem('isLoggedIn', 'true');
+            if (response.status === 200) {
+                const data = await response.json();
+                const token = data.token;
+
+                
+                localStorage.setItem('token', token);
                 localStorage.setItem('usermail', usermail);
+                localStorage.setItem('isLoggedIn', 'true');
 
-                // Redireccionar a la página de inicio
+                
                 window.location.href = "index.html";
             } else {
-                alert("Contraseña incorrecta. Intente de nuevo.");
+                alert("Usuario y/o contraseña incorrectos. Intente de nuevo.");
             }
-        } else {
-            alert("Usuario no encontrado. Por favor, regístrese primero.");
+        } catch (error) {
+            console.error('Error en la solicitud fetch:', error);
+            alert('Error en la solicitud. Por favor, inténtalo de nuevo.');
         }
     });
 });
